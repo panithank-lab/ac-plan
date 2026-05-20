@@ -1,0 +1,2868 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แผนงานติดตั้งระบบแอร์ — รพ.สัตว์ มอ.</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Kanit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #1a3a5c;
+  --primary-light: #2563a8;
+  --accent: #0ea5e9;
+  --accent2: #f59e0b;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --warn: #d97706;
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --border: #dde3ec;
+  --text: #1e293b;
+  --text2: #64748b;
+  --text3: #94a3b8;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(26,58,92,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+/* HEADER */
+.app-header{background:var(--primary);color:#fff;padding:0;display:flex;align-items:stretch;gap:0;border-bottom:3px solid var(--accent)}
+.header-brand{padding:14px 24px;background:rgba(0,0,0,0.15);display:flex;align-items:center;gap:12px}
+.header-brand h1{font-family:'Kanit',sans-serif;font-size:17px;font-weight:600;line-height:1.3}
+.header-brand p{font-size:11px;opacity:0.7;margin-top:2px}
+.header-nav{display:flex;align-items:center;padding:0 8px;gap:2px;overflow-x:auto}
+.nav-btn{padding:8px 14px;border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer;border-radius:6px;white-space:nowrap;transition:all 0.15s}
+.nav-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+.nav-btn.active{background:var(--accent);color:#fff;font-weight:500}
+.header-stats{margin-left:auto;display:flex;align-items:center;gap:0;border-left:1px solid rgba(255,255,255,0.1)}
+.hstat{padding:10px 18px;text-align:center;border-right:1px solid rgba(255,255,255,0.1)}
+.hstat-num{font-size:20px;font-weight:700;font-family:'Kanit',sans-serif;color:var(--accent)}
+.hstat-label{font-size:10px;opacity:0.6;margin-top:1px}
+/* PAGES */
+.page{display:none;padding:20px;max-width:1400px;margin:0 auto}
+.page.active{display:block}
+/* CARDS */
+.card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);margin-bottom:16px}
+.card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card-title{font-family:'Kanit',sans-serif;font-size:15px;font-weight:500;color:var(--primary)}
+.card-body{padding:16px 18px}
+/* GRID */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+/* STAT CARDS */
+.stat-card{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:14px 16px;text-align:center}
+.stat-num{font-size:28px;font-weight:700;font-family:'Kanit',sans-serif;color:var(--primary-light)}
+.stat-label{font-size:11px;color:var(--text2);margin-top:4px}
+.stat-sub{font-size:11px;color:var(--text3);margin-top:2px}
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+.badge-blue{background:#dbeafe;color:#1d4ed8}
+.badge-green{background:#dcfce7;color:#15803d}
+.badge-amber{background:#fef3c7;color:#b45309}
+.badge-red{background:#fee2e2;color:#b91c1c}
+.badge-gray{background:#f1f5f9;color:#475569}
+.badge-purple{background:#f3e8ff;color:#7c3aed}
+/* TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:13px}
+.data-table th{text-align:left;padding:9px 12px;background:#f8fafc;border-bottom:1px solid var(--border);font-weight:600;color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap}
+.data-table td{padding:9px 12px;border-bottom:1px solid #f1f5f9;color:var(--text);vertical-align:middle}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:#f8fafc}
+.data-table .group-row td{background:#f0f7ff;font-weight:600;font-size:12px;color:var(--primary);padding:6px 12px}
+/* TABS */
+.tab-bar{display:flex;gap:4px;margin-bottom:16px;background:var(--surface);border-radius:var(--radius);padding:6px;border:1px solid var(--border)}
+.tab{padding:7px 16px;border-radius:7px;border:none;background:transparent;font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer;color:var(--text2);transition:all 0.15s}
+.tab:hover{background:#f0f4f8}
+.tab.active{background:var(--primary);color:#fff;font-weight:500}
+/* GANTT */
+.gantt-wrap{overflow-x:auto}
+.gantt{border-collapse:collapse;font-size:12px;min-width:900px;width:100%}
+.gantt th{padding:7px 8px;background:#f8fafc;border:1px solid var(--border);font-size:11px;font-weight:600;color:var(--text2);text-align:center;white-space:nowrap}
+.gantt td{padding:5px 8px;border:1px solid #eef2f7;vertical-align:middle}
+.gantt .room-cell{white-space:nowrap;font-size:12px;max-width:200px;overflow:hidden;text-overflow:ellipsis}
+.bar{height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:500;white-space:nowrap;overflow:hidden;padding:0 4px}
+.bar-blue{background:var(--primary-light)}
+.bar-green{background:var(--success)}
+.bar-amber{background:var(--warn)}
+.bar-red{background:var(--danger)}
+/* CALENDAR */
+.month-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-header{padding:6px;text-align:center;font-size:11px;font-weight:600;color:var(--text2);background:#f8fafc;border-radius:4px}
+.cal-day{border-radius:6px;border:1px solid var(--border);min-height:72px;padding:4px;font-size:10px;background:var(--surface);cursor:pointer;transition:border 0.15s}
+.cal-day:hover{border-color:var(--accent)}
+.cal-day.today{border-color:var(--accent);background:#e0f2fe}
+.cal-day.weekend{background:#fafafa}
+.cal-day.empty{background:transparent;border-color:transparent}
+.cal-day-num{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:2px}
+.cal-task{padding:1px 4px;border-radius:3px;font-size:9px;font-weight:500;margin-bottom:1px;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* INSPECTION FORM */
+.form-section{background:#f8fafc;border-radius:8px;padding:14px;margin-bottom:14px}
+.form-section-title{font-size:13px;font-weight:600;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:3px}
+.form-label{font-size:12px;font-weight:500;color:var(--text2)}
+.form-input{padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-family:'Sarabun',sans-serif;font-size:13px;color:var(--text);background:#fff;outline:none;transition:border 0.15s}
+.form-input:focus{border-color:var(--accent)}
+.form-select{padding:7px 10px;border:1px solid var(--border);border-radius:6px;font-family:'Sarabun',sans-serif;font-size:13px;color:var(--text);background:#fff;outline:none;cursor:pointer}
+.form-textarea{resize:vertical;min-height:60px}
+.check-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #eef2f7;cursor:pointer}
+.check-row:last-child{border-bottom:none}
+.check-row input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--primary-light)}
+.check-row label{font-size:13px;flex:1;cursor:pointer}
+.check-status{width:70px;text-align:center}
+.check-note{flex:0 0 120px}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:7px;border:none;font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer;font-weight:500;transition:all 0.15s}
+.btn-primary{background:var(--primary-light);color:#fff}
+.btn-primary:hover{background:var(--primary)}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{background:#15803d}
+.btn-outline{background:transparent;color:var(--primary-light);border:1px solid var(--primary-light)}
+.btn-outline:hover{background:#dbeafe}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-amber{background:var(--warn);color:#fff}
+.btn-sm{padding:5px 10px;font-size:12px}
+/* PRINT */
+@media print {
+  .app-header,.tab-bar,.btn,.header-nav,.header-stats{display:none!important}
+  .page{display:block!important;padding:0}
+  .card{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid}
+  body{background:#fff}
+}
+/* PROGRESS BAR */
+.progress-bar{height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width 0.3s}
+.progress-blue{background:var(--primary-light)}
+.progress-green{background:var(--success)}
+.progress-amber{background:var(--warn)}
+/* TOOLTIP */
+.tip{position:relative;cursor:help}
+.tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:4px 8px;border-radius:5px;font-size:11px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:99}
+.tip:hover::after{opacity:1}
+/* NOTICE */
+.notice{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;display:flex;align-items:flex-start;gap:8px}
+.notice-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.notice-info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.notice-success{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .grid2,.grid3,.grid4{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .header-stats{display:none}
+}
+/* PIN MODAL */
+.pin-dot{width:16px;height:16px;border-radius:50%;background:#e2e8f0;border:2px solid #cbd5e1;transition:all 0.15s}
+.pin-dot.filled{background:#1a3a5c;border-color:#1a3a5c;transform:scale(1.1)}
+.pin-dot.shake{animation:pinShake 0.4s ease}
+.pin-key{padding:14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-family:'Sarabun',sans-serif;font-size:18px;font-weight:600;color:#1e293b;cursor:pointer;transition:all 0.12s}
+.pin-key:hover{background:#e0f2fe;border-color:#0ea5e9}
+.pin-key:active{transform:scale(0.94);background:#bfdbfe}
+.pin-key-clear{font-size:12px;color:#64748b;background:#fff0f0;border-color:#fca5a5}
+.pin-key-del{font-size:16px;background:#fff;color:#475569}
+/* Lock overlay on edit buttons when locked */
+.edit-locked{opacity:0.45;pointer-events:none}
+@keyframes pinShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="header-brand">
+    <div>
+      <h1>⚙ แผนงานติดตั้งระบบแอร์</h1>
+      <p>รพ.สัตว์ อาคารจุฬาภรณการุณยรักษ์ คณะสัตวแพทยศาสตร์ มอ. | พ.ค.–ก.ย. 2569</p>
+    </div>
+  </div>
+  <div class="header-nav">
+    <button class="nav-btn active" onclick="showPage('overview')">ภาพรวม</button>
+    <button class="nav-btn" onclick="showPage('daily')">แผนรายวัน</button>
+    <button class="nav-btn" onclick="showPage('monthly')">แผนรายเดือน</button>
+    <button class="nav-btn" onclick="showPage('gantt')">Gantt Chart</button>
+    <button class="nav-btn" onclick="showPage('inspect')">ใบตรวจงาน</button>
+    <button class="nav-btn" onclick="showPage('rooms')">รายการห้อง</button>
+    <button class="nav-btn" onclick="showPage('tracking')">📈 ติดตามงาน</button>
+    <button class="nav-btn" onclick="showPage('dashboard')">📊 Dashboard</button>
+    <button class="nav-btn" onclick="showPage('export')">Export / Sheets</button>
+    <button class="nav-btn" onclick="showPage('settings')">⚙️ ตั้งค่า</button>
+  </div>
+  <div class="header-stats">
+    <div class="hstat"><div class="hstat-num">37</div><div class="hstat-label">เครื่องทั้งหมด</div></div>
+    <div class="hstat"><div class="hstat-num" id="total-rooms-stat">27</div><div class="hstat-label">ตำแหน่ง</div></div>
+    <div class="hstat" style="cursor:pointer" onclick="forceSyncToSheets()" title="อัปโหลดข้อมูลทั้งหมดขึ้น Sheets">
+      <div class="hstat-num" id="sync-icon">☁️</div>
+      <div class="hstat-label">Sync Sheets</div>
+    </div>
+    <div class="hstat"><div class="hstat-num" id="overall-pct">0%</div><div class="hstat-label">ความคืบหน้า</div></div>
+    <div class="hstat" style="cursor:pointer" onclick="toggleLockUI()" title="คลิกเพื่อล็อก/ปลดล็อก">
+      <div class="hstat-num" id="lock-icon">🔒</div>
+      <div class="hstat-label" id="lock-label">ล็อกอยู่</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: SETTINGS -->
+<div id="page-settings" class="page">
+  <div class="grid2">
+    <!-- Google Sheets Connection -->
+    <div class="card" style="margin:0">
+      <div class="card-header"><div class="card-title">🔗 เชื่อมต่อ Google Sheets</div></div>
+      <div class="card-body">
+        <div id="sheets-connected-info" style="display:none;margin-bottom:16px">
+          <div class="notice notice-success" style="margin-bottom:10px">✅ เชื่อมต่อแล้ว</div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:8px">URL ปัจจุบัน:</div>
+          <div id="current-api-url" style="font-size:11px;background:#f8fafc;padding:8px;border-radius:6px;border:1px solid var(--border);word-break:break-all;color:var(--text2)"></div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <button class="btn btn-primary" onclick="forceSyncToSheets()">☁️ Sync ข้อมูลขึ้น Sheets ทันที</button>
+            <button class="btn btn-outline" onclick="changeApiUrl()">✏️ เปลี่ยน URL</button>
+            <button class="btn btn-sm" style="background:#fee2e2;color:#b91c1c;border:none" onclick="clearApiUrl()">ยกเลิกการเชื่อมต่อ</button>
+          </div>
+        </div>
+        <div id="sheets-not-connected-info">
+          <div class="notice notice-warn" style="margin-bottom:12px">⚠️ ยังไม่ได้เชื่อมต่อ — ข้อมูลจะไม่ซิงค์ข้ามเครื่อง</div>
+          <div class="form-group" style="margin-bottom:10px">
+            <label class="form-label">Apps Script Web App URL</label>
+            <input type="url" id="api-url-input-settings" class="form-input"
+              placeholder="https://script.google.com/macros/s/.../exec">
+          </div>
+          <button class="btn btn-primary" onclick="saveApiUrlFromSettings()">เชื่อมต่อ</button>
+        </div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600;margin-bottom:8px">วิธีได้ URL</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.8">
+          1. เปิด Google Sheets → Extensions → Apps Script<br>
+          2. วางโค้ดจาก Code.gs → Save → รัน setupSheets<br>
+          3. Deploy → New deployment → Web App → Anyone<br>
+          4. คัดลอก URL มาวางด้านบน
+        </div>
+      </div>
+    </div>
+
+    <!-- Sync & Data -->
+    <div class="card" style="margin:0">
+      <div class="card-header"><div class="card-title">☁️ ซิงค์ข้อมูล</div></div>
+      <div class="card-body">
+        <div style="font-size:13px;margin-bottom:14px;color:var(--text2)">
+          อัปโหลดข้อมูลทั้งหมดจากเครื่องนี้ขึ้น Google Sheets ให้เครื่องอื่นเห็นข้อมูลล่าสุด
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn btn-primary" onclick="forceSyncToSheets()" style="width:100%;justify-content:center">
+            ☁️ อัปโหลดข้อมูลทั้งหมดขึ้น Sheets
+          </button>
+          <button class="btn btn-outline" onclick="loadFromSheets()" style="width:100%;justify-content:center">
+            🔄 โหลดข้อมูลล่าสุดจาก Sheets
+          </button>
+        </div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid var(--border)">
+        <div style="font-size:12px;color:var(--text2)">
+          <div style="font-weight:600;margin-bottom:6px">ข้อมูลในเครื่องนี้:</div>
+          <div id="local-data-info"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PIN MODAL -->
+<div id="pin-overlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.7);z-index:9999;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:#fff;border-radius:16px;padding:32px 28px;width:320px;box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center">
+    <div style="font-size:36px;margin-bottom:8px">🔐</div>
+    <h3 style="font-size:17px;font-weight:600;color:#1e293b;margin-bottom:4px">ยืนยันตัวตน</h3>
+    <p style="font-size:13px;color:#64748b;margin-bottom:20px" id="pin-action-label">กรุณาใส่รหัส 4 หลักเพื่อแก้ไข</p>
+
+    <!-- PIN dots display -->
+    <div style="display:flex;gap:12px;justify-content:center;margin-bottom:20px" id="pin-dots">
+      <div class="pin-dot" id="dot-0"></div>
+      <div class="pin-dot" id="dot-1"></div>
+      <div class="pin-dot" id="dot-2"></div>
+      <div class="pin-dot" id="dot-3"></div>
+    </div>
+
+    <!-- Error message -->
+    <div id="pin-error" style="display:none;background:#fee2e2;color:#b91c1c;border-radius:8px;padding:6px 12px;font-size:12px;margin-bottom:12px">
+      รหัสไม่ถูกต้อง กรุณาลองใหม่
+    </div>
+
+    <!-- Numpad -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px">
+      <button class="pin-key" onclick="pinPress('1')">1</button>
+      <button class="pin-key" onclick="pinPress('2')">2</button>
+      <button class="pin-key" onclick="pinPress('3')">3</button>
+      <button class="pin-key" onclick="pinPress('4')">4</button>
+      <button class="pin-key" onclick="pinPress('5')">5</button>
+      <button class="pin-key" onclick="pinPress('6')">6</button>
+      <button class="pin-key" onclick="pinPress('7')">7</button>
+      <button class="pin-key" onclick="pinPress('8')">8</button>
+      <button class="pin-key" onclick="pinPress('9')">9</button>
+      <button class="pin-key pin-key-clear" onclick="pinClear()">ล้าง</button>
+      <button class="pin-key" onclick="pinPress('0')">0</button>
+      <button class="pin-key pin-key-del" onclick="pinDel()">⌫</button>
+    </div>
+    <button onclick="closePinModal()" style="width:100%;padding:9px;border:1px solid #e2e8f0;border-radius:8px;background:transparent;font-family:'Sarabun',sans-serif;font-size:13px;color:#64748b;cursor:pointer">ยกเลิก</button>
+  </div>
+</div>
+
+<!-- SYNC TOOLBAR — แสดงตลอดเวลา -->
+<div id="sync-toolbar" style="background:#f0f4f8;border-bottom:1px solid #dde3ec;padding:6px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px">
+  <span id="sync-status-dot" style="width:8px;height:8px;border-radius:50%;background:#94a3b8;flex-shrink:0;display:inline-block"></span>
+  <span id="sync-status-text" style="color:#64748b">ตรวจสอบการเชื่อมต่อ...</span>
+  <span style="color:#cbd5e1">|</span>
+  <span id="sync-last-time" style="color:#94a3b8">—</span>
+  <div style="margin-left:auto;display:flex;gap:6px">
+    <button onclick="pullFromSheets()" class="btn btn-sm btn-outline" style="font-size:11px;padding:4px 10px">
+      ⬇ ดึงข้อมูลจาก Sheets
+    </button>
+    <button onclick="pushToSheets()" class="btn btn-sm btn-primary" style="font-size:11px;padding:4px 10px">
+      ⬆ บันทึกขึ้น Sheets
+    </button>
+  </div>
+</div>
+
+<!-- PAGE: OVERVIEW -->
+<div id="page-overview" class="page active">
+  <div class="grid4" style="margin-bottom:16px" id="overview-stats"></div>
+  <div class="notice notice-info" id="overview-notice">ℹ <span>กำลังโหลดข้อมูล...</span></div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">สรุปแผนงานรายเดือน</div>
+        <span style="font-size:11px;color:var(--text2)" id="overview-last-updated"></span>
+      </div>
+      <div class="card-body" id="overview-monthly-table"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><div class="card-title">ขั้นตอนการติดตั้งมาตรฐาน</div></div>
+      <div class="card-body">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">1</div>
+            <div><div style="font-weight:600;font-size:13px">กั้นพื้นที่ + แจ้งผู้ใช้บริการ</div><div style="font-size:12px;color:var(--text2)">1 วันก่อนเริ่ม — ป้ายประกาศ + แจ้ง Line กลุ่ม</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">2</div>
+            <div><div style="font-weight:600;font-size:13px">งานระบบไฟฟ้า</div><div style="font-size:12px;color:var(--text2)">เดินท่อ Conduit + สาย + CB ย่อย (Schneider/ABB)</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">3</div>
+            <div><div style="font-weight:600;font-size:13px">เดินท่อน้ำยา + ฉนวน</div><div style="font-size:12px;color:var(--text2)">ท่อทองแดงม้วน + ฉนวน ≥ 3/4" ทุกรอยต่อสนิท</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">4</div>
+            <div><div style="font-weight:600;font-size:13px">ติดตั้งท่อน้ำทิ้ง</div><div style="font-size:12px;color:var(--text2)">PVC Class 8.5 ลาดเอียง ≥ 1:50</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">5</div>
+            <div><div style="font-weight:600;font-size:13px">ติดตั้ง Fan Coil Unit</div><div style="font-size:12px;color:var(--text2)">แขวนใต้ฝ้า ได้ระดับ + ต่อท่อ + ต่อสายไฟ</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--primary-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">6</div>
+            <div><div style="font-weight:600;font-size:13px">ติดตั้ง Condensing Unit</div><div style="font-size:12px;color:var(--text2)">ยึดแน่น + ต่อท่อน้ำยา + ต่อสายไฟ 3 เฟส/1 เฟส</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">7</div>
+            <div><div style="font-weight:600;font-size:13px">Vacuum + Charge + ทดสอบ</div><div style="font-size:12px;color:var(--text2)">Pressure Test 600PSI → Vacuum → Charge R32/R410A</div></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--success);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0">8</div>
+            <div><div style="font-weight:600;font-size:13px">ส่งมอบ + อบรม</div><div style="font-size:12px;color:var(--text2)">รับประกัน 2 ปี | คอมเพรสเซอร์ 5 ปี | บำรุงทุก 6 เดือน</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">ความคืบหน้าการติดตั้ง</div>
+      <button class="btn btn-sm btn-outline" onclick="showPage('inspect');document.querySelector('.nav-btn:nth-child(5)').classList.add('active')">+ เพิ่มผลตรวจ</button>
+    </div>
+    <div class="card-body">
+      <div id="progress-overview"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: DAILY PLAN -->
+<div id="page-daily" class="page">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">แผนงานรายวัน — เลือกวันที่ต้องการ</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input type="date" id="daily-date" class="form-input" style="width:160px" onchange="loadDailyPlan()">
+        <button class="btn btn-primary btn-sm" onclick="printSection('page-daily')">🖨 พิมพ์</button>
+      </div>
+    </div>
+    <div class="card-body" id="daily-content">
+      <p style="color:var(--text3);text-align:center;padding:20px">เลือกวันที่เพื่อดูแผนงาน</p>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: MONTHLY -->
+<div id="page-monthly" class="page">
+  <div style="display:flex;gap:8px;margin-bottom:16px;align-items:center">
+    <div class="tab-bar" style="margin:0">
+      <button class="tab active" onclick="showMonth('may',this)">พฤษภาคม 2569</button>
+      <button class="tab" onclick="showMonth('jun',this)">มิถุนายน 2569</button>
+      <button class="tab" onclick="showMonth('jul',this)">กรกฎาคม 2569</button>
+      <button class="tab" onclick="showMonth('aug',this)">สิงหาคม 2569</button>
+      <button class="tab" onclick="showMonth('sep',this)">กันยายน 2569</button>
+    </div>
+    <button class="btn btn-sm btn-outline" onclick="window.print()">🖨 พิมพ์เดือน</button>
+  </div>
+  <div id="monthly-content"></div>
+</div>
+
+<!-- PAGE: GANTT -->
+<div id="page-gantt" class="page">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Gantt Chart — แผนงานตลอดโครงการ</div>
+      <button class="btn btn-sm btn-outline" onclick="printSection('page-gantt')">🖨 พิมพ์</button>
+    </div>
+    <div class="card-body">
+      <div class="gantt-wrap" id="gantt-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: INSPECT -->
+<div id="page-inspect" class="page">
+  <div class="grid2">
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📋 ใบตรวจงานผู้ควบคุมงาน</div>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button class="btn btn-sm btn-outline" onclick="window.print()">🖨 พิมพ์</button>
+            <button id="inspect-save-btn" class="btn btn-sm btn-success" onclick="saveInspection()" style="display:none">💾 บันทึก</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <!-- Lock notice — เรียบง่าย ไม่มีปุ่มปลดล็อก -->
+          <div id="inspect-locked-notice" class="notice notice-info" style="display:flex;align-items:center;gap:8px">
+            <span>🔒 โหมดดูข้อมูล — กรุณาปลดล็อกที่ไอคอน 🔒 มุมขวาบนก่อนบันทึก</span>
+          </div>
+          <div id="inspect-unlocked-notice" class="notice notice-success" style="display:none;align-items:center;justify-content:space-between;gap:10px">
+            <span>🔓 โหมดแก้ไข — สามารถกรอกและบันทึกใบตรวจงานได้</span>
+            <button class="btn btn-sm btn-outline" onclick="lockAll()">ล็อกอีกครั้ง</button>
+          </div>
+          <!-- ข้อมูลทั่วไป -->
+          <div class="form-section">
+            <div class="form-section-title">🏢 ข้อมูลการตรวจ</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">วันที่ตรวจ</label>
+                <input type="date" id="ins-date" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">เลขที่ใบตรวจ</label>
+                <input type="text" id="ins-no" class="form-input" placeholder="INS-2569-001">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ห้อง/พื้นที่</label>
+                <select id="ins-room" class="form-select" onchange="updateInspRoom()">
+                  <option value="">-- เลือกห้อง --</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">ชั้น</label>
+                <input type="text" id="ins-floor" class="form-input" readonly>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ผู้ควบคุมงาน</label>
+                <input type="text" id="ins-supervisor" class="form-input" placeholder="ชื่อ-นามสกุล">
+              </div>
+              <div class="form-group">
+                <label class="form-label">ผู้รับเหมา / ช่างติดตั้ง</label>
+                <input type="text" id="ins-contractor" class="form-input" placeholder="ชื่อบริษัท/ทีมช่าง">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ขนาดแอร์ (BTU/hr)</label>
+                <input type="text" id="ins-btu" class="form-input" readonly>
+              </div>
+              <div class="form-group">
+                <label class="form-label">ยี่ห้อ/รุ่น</label>
+                <input type="text" id="ins-brand" class="form-input" placeholder="ยี่ห้อ รุ่น Serial No.">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">ขั้นตอนที่ตรวจ</label>
+                <select id="ins-step" class="form-select">
+                  <option>1. กั้นพื้นที่และแจ้งผู้ใช้บริการ</option>
+                  <option>2. งานระบบไฟฟ้า (Electrical Work)</option>
+                  <option>3. เดินท่อน้ำยา (Refrigerant Piping)</option>
+                  <option>4. ท่อน้ำทิ้ง (Drain Piping)</option>
+                  <option>5. ติดตั้ง Fan Coil Unit</option>
+                  <option>6. ติดตั้ง Condensing Unit</option>
+                  <option>7. Charge น้ำยาและทดสอบระบบ</option>
+                  <option>8. ส่งมอบ + อบรม + ทำความสะอาด</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">ผลการตรวจโดยรวม</label>
+                <select id="ins-result" class="form-select">
+                  <option value="pass">✅ ผ่าน</option>
+                  <option value="conditional">⚠️ ผ่านมีเงื่อนไข</option>
+                  <option value="fail">❌ ไม่ผ่าน ต้องแก้ไข</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- รายการตรวจสอบ -->
+          <div class="form-section">
+            <div class="form-section-title">🔍 รายการตรวจสอบ</div>
+
+            <div style="font-size:11px;font-weight:600;color:var(--text2);padding:4px 0;margin-bottom:4px;border-bottom:1px solid var(--border)">A. ระบบไฟฟ้า</div>
+            <div id="checks-electrical"></div>
+
+            <div style="font-size:11px;font-weight:600;color:var(--text2);padding:8px 0 4px;margin-bottom:4px;border-bottom:1px solid var(--border)">B. งานท่อและฉนวน</div>
+            <div id="checks-pipe"></div>
+
+            <div style="font-size:11px;font-weight:600;color:var(--text2);padding:8px 0 4px;margin-bottom:4px;border-bottom:1px solid var(--border)">C. การติดตั้งเครื่อง</div>
+            <div id="checks-unit"></div>
+
+            <div style="font-size:11px;font-weight:600;color:var(--text2);padding:8px 0 4px;margin-bottom:4px;border-bottom:1px solid var(--border)">D. การทดสอบระบบ</div>
+            <div id="checks-test"></div>
+
+            <div style="font-size:11px;font-weight:600;color:var(--text2);padding:8px 0 4px;margin-bottom:4px;border-bottom:1px solid var(--border)">E. ความปลอดภัยและความสะอาด</div>
+            <div id="checks-safety"></div>
+          </div>
+
+          <!-- หมายเหตุ -->
+          <div class="form-section">
+            <div class="form-section-title">📝 หมายเหตุและข้อกำหนดแก้ไข</div>
+            <div class="form-row full">
+              <div class="form-group">
+                <label class="form-label">ข้อสังเกตเพิ่มเติม</label>
+                <textarea id="ins-note" class="form-input form-textarea" placeholder="บันทึกรายละเอียดที่พบ ปัญหา หรือข้อเสนอแนะ..."></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">กำหนดแก้ไขภายใน</label>
+                <input type="date" id="ins-deadline" class="form-input">
+              </div>
+              <div class="form-group">
+                <label class="form-label">วันที่ตรวจซ้ำ</label>
+                <input type="date" id="ins-recheck" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- ลายมือชื่อ -->
+          <div class="form-section">
+            <div class="form-section-title">✍ ลายมือชื่อ</div>
+            <div class="form-row">
+              <div class="form-group" style="text-align:center">
+                <div style="border:1px dashed var(--border);border-radius:8px;height:60px;display:flex;align-items:center;justify-content:center;background:#fafafa">
+                  <span style="font-size:12px;color:var(--text3)">ลายมือชื่อผู้ควบคุมงาน</span>
+                </div>
+                <div style="font-size:12px;margin-top:6px;border-top:1px solid var(--border);padding-top:4px">
+                  (............................................) <br>
+                  ผู้ควบคุมงาน
+                </div>
+              </div>
+              <div class="form-group" style="text-align:center">
+                <div style="border:1px dashed var(--border);border-radius:8px;height:60px;display:flex;align-items:center;justify-content:center;background:#fafafa">
+                  <span style="font-size:12px;color:var(--text3)">ลายมือชื่อผู้รับเหมา</span>
+                </div>
+                <div style="font-size:12px;margin-top:6px;border-top:1px solid var(--border);padding-top:4px">
+                  (............................................) <br>
+                  ผู้รับเหมา
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- บันทึกการตรวจ -->
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📁 ประวัติใบตรวจงาน</div>
+          <button class="btn btn-sm btn-outline" onclick="clearInspections()">ล้างทั้งหมด</button>
+        </div>
+        <div class="card-body">
+          <div id="inspection-history"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0">
+        <div class="card-header"><div class="card-title">📊 สรุปผลการตรวจ</div></div>
+        <div class="card-body" id="inspect-summary">
+          <p style="color:var(--text3);font-size:13px">ยังไม่มีข้อมูลการตรวจ — กรอกใบตรวจแล้วกด "บันทึก"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: ROOMS -->
+<div id="page-rooms" class="page">
+
+  <!-- ADD NEW ROOM CARD -->
+  <div class="card" id="add-room-card" style="display:none">
+    <div class="card-header">
+      <div class="card-title" id="add-room-title">➕ เพิ่มรายการห้องใหม่</div>
+      <button class="btn btn-sm btn-outline" onclick="toggleAddRoom()">✕ ปิด</button>
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">ชื่อห้อง / พื้นที่ *</label><input type="text" id="nr-name" class="form-input" placeholder="เช่น ห้องประชุม 4"></div>
+        <div class="form-group"><label class="form-label">โซน *</label>
+          <select id="nr-zone" class="form-select">
+            <option>ห้องประชุม</option><option>ห้องปฏิบัติการ</option><option>ทางเดิน</option>
+            <option>ห้องตรวจ</option><option>ห้องผ่าตัด</option><option>สำนักงาน</option>
+            <option>คลังยา</option><option>ห้องรักษา</option><option>ห้องจ่ายยา</option>
+            <option>สัตว์ป่วยติดเชื้อ</option><option>Ventilation</option><option>อื่นๆ</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">ชั้น *</label>
+          <select id="nr-floor" class="form-select"><option value="1">ชั้น 1</option><option value="2">ชั้น 2</option><option value="3">ชั้น 3</option><option value="ดาดฟ้า">ดาดฟ้า</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">ขนาด BTU/hr *</label>
+          <select id="nr-btu" class="form-select">
+            <option value="9000">9,000</option><option value="13000">13,000</option><option value="18000">18,000</option>
+            <option value="24000">24,000</option><option value="26000">26,000</option><option value="30000">30,000</option>
+            <option value="36000">36,000</option><option value="40000">40,000</option><option value="48000">48,000</option>
+            <option value="60000">60,000</option><option value="150000">150,000 (AHU)</option><option value="0">ไม่มี (Ventilation)</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">จำนวนเครื่อง *</label><input type="number" id="nr-qty" class="form-input" value="1" min="1" max="10"></div>
+        <div class="form-group"><label class="form-label">ระบบไฟฟ้า *</label>
+          <select id="nr-phase" class="form-select"><option value="1">1 เฟส 220V</option><option value="3">3 เฟส 380V</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">ระดับเสียง *</label>
+          <select id="nr-noise" class="form-select"><option value="low">น้อย</option><option value="medium">ปานกลาง</option><option value="high">สูง (ต้องแยกวัน)</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">จำนวนวันติดตั้ง *</label><input type="number" id="nr-days" class="form-input" value="2" min="1" max="14"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">เดือนที่ดำเนินการ *</label>
+          <select id="nr-month" class="form-select"><option value="พ.ค.">พฤษภาคม 2569</option><option value="มิ.ย.">มิถุนายน 2569</option><option value="ก.ค.">กรกฎาคม 2569</option></select>
+        </div>
+        <div class="form-group"><label class="form-label">สัปดาห์ที่ *</label>
+          <select id="nr-week" class="form-select"><option value="1">สัปดาห์ 1 (1–7)</option><option value="2">สัปดาห์ 2 (8–14)</option><option value="3">สัปดาห์ 3 (15–21)</option><option value="4">สัปดาห์ 4 (22–31)</option></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">วันเริ่มต้น (ถ้าระบุ)</label><input type="date" id="nr-startdate" class="form-input"></div>
+        <div class="form-group"><label class="form-label">วันสิ้นสุด (ถ้าระบุ)</label><input type="date" id="nr-enddate" class="form-input"></div>
+      </div>
+      <div class="form-row full">
+        <div class="form-group"><label class="form-label">หมายเหตุ</label><input type="text" id="nr-note" class="form-input" placeholder="เช่น กั้นพื้นที่ / Plasma Ionizer / ระวังรังสี"></div>
+      </div>
+      <input type="hidden" id="nr-edit-id">
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn btn-success" onclick="saveRoom()">💾 บันทึก</button>
+        <button class="btn btn-outline" onclick="toggleAddRoom()">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROOMS TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title" id="rooms-count-title">รายการห้องติดตั้งทั้งหมด</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <select class="form-select" style="font-size:12px;padding:5px 8px" id="room-filter" onchange="filterRooms()">
+          <option value="">ทุกชั้น</option>
+          <option value="1">ชั้น 1</option>
+          <option value="2">ชั้น 2</option>
+          <option value="3">ชั้น 3</option>
+          <option value="ดาดฟ้า">ดาดฟ้า</option>
+        </select>
+        <select class="form-select" style="font-size:12px;padding:5px 8px" id="month-filter" onchange="filterRooms()">
+          <option value="">ทุกเดือน</option>
+          <option value="พ.ค.">พฤษภาคม</option>
+          <option value="มิ.ย.">มิถุนายน</option>
+          <option value="ก.ค.">กรกฎาคม</option>
+        </select>
+        <!-- ปุ่มแก้ไข: แสดงเฉพาะตอนปลดล็อก -->
+        <button id="rooms-add-btn" class="btn btn-sm btn-primary" onclick="toggleAddRoom()" style="display:none">➕ เพิ่มห้อง</button>
+        <button class="btn btn-sm btn-outline" onclick="window.print()">🖨 พิมพ์</button>
+      </div>
+    </div>
+    <div class="card-body" style="padding:0;overflow-x:auto">
+      <table class="data-table" id="rooms-table">
+        <thead>
+          <tr>
+            <th>#</th><th>ชั้น</th><th>ห้อง / พื้นที่</th><th>BTU/hr</th><th>เครื่อง</th><th>เฟส</th>
+            <th>เสียง</th><th>เดือน</th><th>สัปดาห์</th><th>วันเริ่ม</th><th>วันสิ้นสุด</th><th>วัน</th><th>หมายเหตุ</th><th>สถานะ</th><th style="width:80px">จัดการ</th>
+          </tr>
+        </thead>
+        <tbody id="rooms-tbody"></tbody>
+      </table>
+    </div>
+    <div style="padding:10px 18px;font-size:12px;color:var(--text2);border-top:1px solid var(--border);display:flex;gap:16px" id="rooms-summary-bar">
+    </div>
+  </div>
+</div>
+
+
+<!-- PAGE: TRACKING -->
+<div id="page-tracking" class="page">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+    <div>
+      <h2 style="font-size:17px;font-weight:600;color:var(--primary)">📈 ติดตามความคืบหน้างาน</h2>
+      <p style="font-size:12px;color:var(--text2);margin-top:2px">เปรียบเทียบผลงานจริงกับแผน — อัปเดตจากใบตรวจงานและวันที่ในแผน</p>
+    </div>
+    <button class="btn btn-sm btn-primary" onclick="buildTracking()">🔄 รีเฟรช</button>
+  </div>
+  <div id="tracking-content"><p style="color:var(--text3);text-align:center;padding:40px">กำลังโหลด...</p></div>
+</div>
+
+<!-- PAGE: DASHBOARD -->
+<div id="page-dashboard" class="page">
+  <div class="grid4" style="margin-bottom:16px" id="db-stats"></div>
+
+  <div class="grid2" style="margin-bottom:16px">
+    <div class="card" style="margin:0">
+      <div class="card-header"><div class="card-title">📈 ความคืบหน้าแต่ละโซน</div></div>
+      <div class="card-body" id="db-zone-progress"></div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="card-header"><div class="card-title">🗓 Timeline โครงการ</div></div>
+      <div class="card-body" id="db-timeline"></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card" style="margin:0">
+      <div class="card-header"><div class="card-title">⚠ ห้องที่ต้องแก้ไข / ค้างตรวจ</div></div>
+      <div class="card-body" id="db-issues"></div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="card-header"><div class="card-title">📋 รายการตรวจล่าสุด</div></div>
+      <div class="card-body" id="db-recent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: EXPORT -->
+<div id="page-export" class="page">
+  <div class="notice notice-info">ℹ คัดลอกข้อมูลด้านล่างไปวางใน Google Sheets ได้เลย หรือดาวน์โหลดเป็น CSV แล้ว Import เข้า Google Sheets</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">📊 ข้อมูลสำหรับ Google Sheets</div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-sm btn-success" onclick="copyCSV('rooms')">📋 Copy รายการห้อง</button>
+          <button class="btn btn-sm btn-primary" onclick="downloadCSV('rooms')">⬇ Download CSV</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <p style="font-size:12px;color:var(--text2);margin-bottom:8px">ตาราง: รายการห้องและแผนติดตั้ง</p>
+        <textarea id="csv-rooms" class="form-input form-textarea" style="height:200px;font-family:monospace;font-size:11px" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">📅 ข้อมูล Gantt / แผนรายสัปดาห์</div>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-sm btn-success" onclick="copyCSV('gantt')">📋 Copy Gantt</button>
+          <button class="btn btn-sm btn-primary" onclick="downloadCSV('gantt')">⬇ Download CSV</button>
+        </div>
+      </div>
+      <div class="card-body">
+        <p style="font-size:12px;color:var(--text2);margin-bottom:8px">ตาราง: แผนงานรายสัปดาห์</p>
+        <textarea id="csv-gantt" class="form-input form-textarea" style="height:200px;font-family:monospace;font-size:11px" readonly></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📓 รายงานประจำวัน (Daily Log)</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-sm btn-success" onclick="copyCSV('dailylogs')">📋 Copy Daily Log</button>
+        <button class="btn btn-sm btn-primary" onclick="downloadCSV('dailylogs')">⬇ Download CSV</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text2);margin-bottom:8px">ตาราง: บันทึกรายงานประจำวันทั้งหมด</p>
+      <textarea id="csv-dailylogs" class="form-input form-textarea" style="height:120px;font-family:monospace;font-size:11px" readonly></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">📋 ข้อมูลใบตรวจงาน (Inspection Log)</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-sm btn-success" onclick="copyCSV('inspect')">📋 Copy ใบตรวจ</button>
+        <button class="btn btn-sm btn-primary" onclick="downloadCSV('inspect')">⬇ Download CSV</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p style="font-size:12px;color:var(--text2);margin-bottom:8px">ตาราง: ประวัติการตรวจงาน (อัปเดตทุกครั้งที่บันทึกใบตรวจ)</p>
+      <textarea id="csv-inspect" class="form-input form-textarea" style="height:160px;font-family:monospace;font-size:11px" readonly></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="card-title">📌 วิธี Import เข้า Google Sheets</div></div>
+    <div class="card-body">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#e0f2fe;color:#0369a1;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0">1</div>
+          <span style="font-size:13px">กด <strong>Download CSV</strong> หรือ <strong>Copy</strong> ข้อมูลที่ต้องการ</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#e0f2fe;color:#0369a1;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0">2</div>
+          <span style="font-size:13px">เปิด <a href="https://sheets.new" target="_blank" style="color:var(--primary-light)">sheets.new</a> เพื่อสร้าง Google Sheets ใหม่</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#e0f2fe;color:#0369a1;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0">3</div>
+          <span style="font-size:13px"><strong>หากใช้ Download CSV:</strong> ไปที่ File → Import → Upload → เลือกไฟล์ CSV</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#e0f2fe;color:#0369a1;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0">4</div>
+          <span style="font-size:13px"><strong>หากใช้ Copy:</strong> คลิกเซลล์ A1 ใน Sheets แล้ว Paste (Ctrl+V)</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="background:#dcfce7;color:#15803d;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0">5</div>
+          <span style="font-size:13px">ทำแต่ละตารางในแต่ละ Sheet แยกกัน: Sheet1=ห้อง, Sheet2=Gantt, Sheet3=ใบตรวจ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const rooms = [
+  // ชั้น 3 ห้องประชุม — เริ่ม 12 พ.ค. 2569
+  {id:'F3-PR1',floor:3,zone:'ห้องประชุม',name:'ห้องประชุม 1',btu:48000,qty:3,phase:3,noise:'low',priority:1,month:'พ.ค.',week:2,days:5,startDate:'2026-05-14',endDate:'2026-05-24',note:'เริ่มก่อน 12 พ.ค. / 3 เฟส / Plasma Ionizer'},
+  {id:'F3-PR2',floor:3,zone:'ห้องประชุม',name:'ห้องประชุม 2',btu:60000,qty:1,phase:3,noise:'low',priority:2,month:'พ.ค.',week:3,days:4,startDate:'2026-05-19',endDate:'2026-05-22',note:'3 เฟส / Plasma Ionizer'},
+  {id:'F3-PR3',floor:3,zone:'ห้องประชุม',name:'ห้องประชุม 3',btu:60000,qty:1,phase:3,noise:'low',priority:3,month:'พ.ค.',week:4,days:4,startDate:'2026-05-25',endDate:'2026-05-28',note:'3 เฟส / Plasma Ionizer'},
+  // ชั้น 1 AHU ทางเดิน
+  {id:'F1-AHU1',floor:1,zone:'ทางเดิน',name:'โถงทางเดิน 1 (AHU)',btu:150000,qty:1,phase:3,noise:'medium',priority:4,month:'พ.ค.',week:5,days:5,startDate:'2026-05-29',endDate:'2026-06-04',note:'R410A / 3 เฟส / กั้นพื้นที่'},
+  {id:'F1-AHU2',floor:1,zone:'ทางเดิน',name:'โถงทางเดิน 2 (AHU)',btu:150000,qty:1,phase:3,noise:'medium',priority:5,month:'มิ.ย.',week:1,days:5,startDate:'2026-06-05',endDate:'2026-06-11',note:'R410A / 3 เฟส / กั้นพื้นที่'},
+  {id:'F1-AHU3',floor:1,zone:'ทางเดิน',name:'โถงทางเดิน 3 (AHU) ⚠เสียงดัง',btu:150000,qty:1,phase:3,noise:'high',priority:6,month:'พ.ค.',week:4,days:5,startDate:'2026-05-27',endDate:'2026-06-02',note:'งานเสียงดัง 27 พ.ค.–2 มิ.ย. / R410A / กั้นพื้นที่พิเศษ'},
+  // ชั้น 1 สำนักงาน + จ่ายยา
+  {id:'F1-FIN',floor:1,zone:'สำนักงาน',name:'ห้องการเงิน',btu:13000,qty:1,phase:1,noise:'low',priority:7,month:'มิ.ย.',week:1,days:2,startDate:'2026-06-03',endDate:'2026-06-04',note:'กั้นพื้นที่ / Plasma Ionizer'},
+  {id:'F1-TECH',floor:1,zone:'สำนักงาน',name:'ห้องช่างเทคนิค',btu:13000,qty:1,phase:1,noise:'low',priority:8,month:'มิ.ย.',week:1,days:2,startDate:'2026-06-05',endDate:'2026-06-08',note:'กั้นพื้นที่ / Plasma Ionizer'},
+  {id:'F1-PHARM',floor:1,zone:'ห้องจ่ายยา',name:'ห้องจ่ายยา',btu:36000,qty:1,phase:3,noise:'medium',priority:9,month:'มิ.ย.',week:2,days:3,startDate:'2026-06-09',endDate:'2026-06-11',note:'กั้นพื้นที่ 3 เฟส / Plasma Ionizer'},
+  // ชั้น 3 Lab แทรก 8–15 มิ.ย.
+  {id:'F3-LAB',floor:3,zone:'ห้องปฏิบัติการ',name:'ห้องปฏิบัติการ 3 + Filter Housing',btu:60000,qty:2,phase:3,noise:'medium',priority:10,month:'มิ.ย.',week:2,days:6,startDate:'2026-06-08',endDate:'2026-06-15',note:'⚡แทรก 8-14 มิ.ย. / FFU ดาดฟ้า / Plasma Ionizer'},
+  // ชั้น 2 คลังยา
+  {id:'F2-DRUG',floor:2,zone:'คลังยา',name:'ห้องคลังยา',btu:40000,qty:2,phase:3,noise:'low',priority:11,month:'มิ.ย.',week:3,days:4,startDate:'2026-06-16',endDate:'2026-06-19',note:'กั้นพื้นที่ / 3 เฟส'},
+  // ชั้น 1 ตรวจสุนัข+แมว 1-2 คู่กัน
+  {id:'F1-DOG12',floor:1,zone:'ห้องตรวจสุนัข',name:'ห้องตรวจสุนัข 1-2',btu:13000,qty:2,phase:1,noise:'low',priority:12,month:'มิ.ย.',week:4,days:6,startDate:'2026-06-22',endDate:'2026-06-29',note:'ทำคู่กับตรวจแมว 1-2 / กั้นพื้นที่ / Plasma Ionizer'},
+  {id:'F1-CAT12',floor:1,zone:'ห้องตรวจแมว',name:'ห้องตรวจแมว 1-2',btu:13000,qty:2,phase:1,noise:'low',priority:13,month:'มิ.ย.',week:4,days:6,startDate:'2026-06-22',endDate:'2026-06-29',note:'ทำคู่กับตรวจสุนัข 1-2 / กั้นพื้นที่ / Plasma Ionizer'},
+  // X-Ray deadline 3 ก.ค.
+  {id:'F1-XRAY',floor:1,zone:'ห้องตรวจ',name:'ห้อง X-Ray',btu:26000,qty:1,phase:1,noise:'medium',priority:14,month:'ก.ค.',week:1,days:3,startDate:'2026-07-01',endDate:'2026-07-03',note:'⚠ Deadline 3 ก.ค. 2569 / ระวังรังสี / ปรึกษาผู้เชี่ยวชาญก่อนเจาะผนัง'},
+  // ชั้น 1 ตรวจสุนัข+แมว 3-4 หลัง X-Ray
+  {id:'F1-DOG34',floor:1,zone:'ห้องตรวจสุนัข',name:'ห้องตรวจสุนัข 3-4',btu:13000,qty:2,phase:1,noise:'low',priority:15,month:'ก.ค.',week:1,days:6,startDate:'2026-07-06',endDate:'2026-07-13',note:'ทำคู่กับตรวจแมว 3-4 / กั้นพื้นที่ / Plasma Ionizer'},
+  {id:'F1-CAT34',floor:1,zone:'ห้องตรวจแมว',name:'ห้องตรวจแมว 3-4',btu:13000,qty:2,phase:1,noise:'low',priority:16,month:'ก.ค.',week:1,days:6,startDate:'2026-07-06',endDate:'2026-07-13',note:'ทำคู่กับตรวจสุนัข 3-4 / กั้นพื้นที่ / Plasma Ionizer'},
+  // ชั้น 2 ห้องตรวจ
+  {id:'F2-EXAM',floor:2,zone:'ห้องตรวจ',name:'ห้องตรวจ ชั้น 2 (3 ห้อง/4 เครื่อง)',btu:13000,qty:4,phase:1,noise:'low',priority:17,month:'ก.ค.',week:2,days:3,startDate:'2026-07-14',endDate:'2026-07-16',note:'กั้นพื้นที่ / Plasma Ionizer'},
+  // อัลตร้าซาวด์
+  {id:'F1-US',floor:1,zone:'ห้องตรวจ',name:'ห้องอัลตร้าซาวด์',btu:30000,qty:1,phase:1,noise:'medium',priority:18,month:'ก.ค.',week:3,days:3,startDate:'2026-07-17',endDate:'2026-07-21',note:'กั้นพื้นที่ / Plasma Ionizer'},
+  // พักพนักงาน
+  {id:'F1-VTAS',floor:1,zone:'สำนักงาน',name:'ห้องพักผู้ช่วยสัตวแพทย์',btu:18000,qty:1,phase:1,noise:'low',priority:19,month:'ก.ค.',week:4,days:2,startDate:'2026-07-22',endDate:'2026-07-23',note:'กั้นพื้นที่'},
+  {id:'F1-STAFF',floor:1,zone:'สำนักงาน',name:'ห้องพักพนักงาน',btu:18000,qty:1,phase:1,noise:'low',priority:20,month:'ก.ค.',week:4,days:2,startDate:'2026-07-24',endDate:'2026-07-27',note:'กั้นพื้นที่'},
+  // ห้องรักษาแมว
+  {id:'F1-CATROOM',floor:1,zone:'ห้องรักษา',name:'ห้องรักษาแมว',btu:40000,qty:1,phase:3,noise:'medium',priority:21,month:'ก.ค.',week:4,days:3,startDate:'2026-07-28',endDate:'2026-07-30',note:'กั้นพื้นที่ 3 เฟส / Plasma Ionizer'},
+  // ห้องผ่าตัด/วางยา เสียงดังแยกวัน
+  {id:'F2-ANES',floor:2,zone:'ห้องผ่าตัด',name:'ห้องวางยา',btu:26000,qty:1,phase:1,noise:'high',priority:22,month:'ก.ค.',week:5,days:3,startDate:'2026-07-31',endDate:'2026-08-04',note:'เสียงมาก แยกจากห้องผ่าตัด / Plasma Ionizer'},
+  {id:'F2-OT',floor:2,zone:'ห้องผ่าตัด',name:'ห้องผ่าตัด',btu:26000,qty:1,phase:1,noise:'high',priority:23,month:'ส.ค.',week:1,days:3,startDate:'2026-08-06',endDate:'2026-08-10',note:'เสียงมาก แยกวันจากห้องวางยา / Plasma Ionizer'},
+  // Ventilation ดาดฟ้า
+  {id:'RF-VENT',floor:'ดาดฟ้า',zone:'Ventilation',name:'Ventilation System (ดาดฟ้า)',btu:0,qty:1,phase:3,noise:'medium',priority:24,month:'ส.ค.',week:2,days:3,startDate:'2026-08-11',endDate:'2026-08-13',note:'Galvanized Steel / AMCA 204'},
+  // สัตว์ป่วยติดเชื้อ แยกกัน
+  {id:'F1-ISO1',floor:1,zone:'สัตว์ป่วยติดเชื้อ',name:'ห้องสัตว์ป่วยติดเชื้อ 1',btu:40000,qty:1,phase:3,noise:'high',priority:25,month:'ส.ค.',week:2,days:4,startDate:'2026-08-14',endDate:'2026-08-19',note:'เสียงมาก / Plasma Ionizer 2 ชุด'},
+  {id:'F1-ISO2',floor:1,zone:'สัตว์ป่วยติดเชื้อ',name:'ห้องสัตว์ป่วยติดเชื้อ 2',btu:30000,qty:1,phase:1,noise:'high',priority:26,month:'ส.ค.',week:3,days:4,startDate:'2026-08-21',endDate:'2026-08-26',note:'เสียงมาก ไม่ทำพร้อมห้อง 1/3 / Plasma Ionizer 2 ชุด'},
+  {id:'F1-ISO3',floor:1,zone:'สัตว์ป่วยติดเชื้อ',name:'ห้องสัตว์ป่วยติดเชื้อ 3',btu:44000,qty:1,phase:3,noise:'high',priority:27,month:'ส.ค.',week:4,days:4,startDate:'2026-08-28',endDate:'2026-09-02',note:'เสียงมาก 44kBTU 3เฟส / Plasma Ionizer 2 ชุด'},
+];
+
+// Weekly plan detail
+const weekPlan = {
+  'พ.ค.w1': {rooms:['F3-PR1'], tasks:['D1:กั้นพื้นที่-เตรียมอุปกรณ์','D1:เดินท่อ Conduit สายไฟ ห้องประชุม 1 (3 เครื่อง)','D2:ติดตั้ง CB ย่อย + เดินท่อน้ำยา','D3:ติดตั้ง FCU เครื่อง 1-2','D4:ติดตั้ง FCU เครื่อง 3 + ท่อน้ำทิ้ง','D5:ติดตั้ง Condensing Unit ดาดฟ้า + ต่อท่อ']},
+  'พ.ค.w2': {rooms:['F3-PR1'], tasks:['D1:Vacuum + Charge น้ำยา ห้องประชุม 1','D2:ทดสอบระบบทั้ง 3 เครื่อง + Ionizer','D3:ทำความสะอาดพื้นที่','D4:เริ่มเดินสายไฟรวม (Electrical Riser) ทุกชั้น','D5:ตรวจรับห้องประชุม 1 + เตรียมห้องประชุม 2']},
+  'พ.ค.w3': {rooms:['F3-PR2','F1-AHU1'], tasks:['D1:กั้นพื้นที่ 2 จุด-ห้องประชุม 2+ทางเดิน 1','D1:เดินท่อ Conduit ห้องประชุม 2 + AHU1','D2-3:ติดตั้ง FCU ห้องประชุม 2 + เดิน AHU pipe','D4:ติดตั้ง AHU FCU ทางเดิน 1 + Condensing','D5:Charge+ทดสอบ ห้องประชุม 2 / ต่อสาย AHU1']},
+  'พ.ค.w4': {rooms:['F3-PR3','F1-AHU2'], tasks:['D1:กั้นพื้นที่-ห้องประชุม 3+ทางเดิน 2','D2:เดินท่อ+สาย ห้องประชุม 3 + AHU2','D3:ติดตั้ง FCU ห้องประชุม 3 + AHU2','D4:ติดตั้ง Condensing 2 ตัว ดาดฟ้า','D5:Charge+ทดสอบ ห้องประชุม 3 + AHU2']},
+  'มิ.ย.w1': {rooms:['F3-LAB','F1-AHU3'], tasks:['D1:กั้นพื้นที่ Lab 3 + ทางเดิน 3','D2:เดินท่อ+สาย Lab 3 (2 เครื่อง 60kBTU)','D3:ติดตั้ง FCU Lab 3 + Filter Housing ดาดฟ้า','D4:ติดตั้ง AHU3 ทางเดิน 3 + Condensing','D5:Vacuum+Charge Lab 3 + AHU3','D6:ทดสอบ+ตรวจรับ Lab 3 + FFU + Ventilation']},
+  'มิ.ย.w2': {rooms:['F2-DRUG','F1-FIN','F1-TECH'], tasks:['D1:กั้นพื้นที่ คลังยา+การเงิน+ช่าง','D2:เดินสาย+ท่อ คลังยา (2×40kBTU)','D3:ติดตั้ง FCU คลังยา + ห้องการเงิน+ช่าง','D4:Condensing คลังยา ดาดฟ้า','D5:Charge+ทดสอบ คลังยา+การเงิน+ช่าง']},
+  'มิ.ย.w3': {rooms:['F2-EXAM','F1-VTAS','F1-STAFF'], tasks:['D1:กั้นพื้นที่ ห้องตรวจ ชั้น 2 (3 ห้อง)','D2:เดินสาย+ท่อ ห้องตรวจ ชั้น 2 (4 เครื่อง)','D3:FCU ห้องตรวจ+พักผู้ช่วยสัตวแพทย์','D4:FCU พักพนักงาน + Condensing รวม','D5:Charge+ทดสอบ ห้องตรวจ ชั้น 2 ทั้งหมด']},
+  'มิ.ย.w4': {rooms:['F2-ANES','F2-OT'], tasks:['D1:กั้นพื้นที่ พิเศษ ห้องวางยา (เสียงดัง)','D2:เดินสาย+ท่อ ห้องวางยา','D3:FCU+Condensing ห้องวางยา + Charge','D4:กั้นพื้นที่ ห้องผ่าตัด (เสียงดัง ต้องหยุดผ่าตัด)','D5:เดินสาย+ท่อ+FCU+Condensing ห้องผ่าตัด + Charge']},
+  'ก.ค.w1': {rooms:['F1-DOG14'], tasks:['D1:กั้นพื้นที่ 4 ห้องตรวจสุนัข','D2:เดินสาย+ท่อ สุนัข 1-2 (2 เครื่อง)','D3:FCU สุนัข 1-2 + Condensing','D4:เดินสาย+ท่อ+FCU สุนัข 3-4','D5:Condensing สุนัข 3-4 + Charge รวม','D6:ทดสอบ+ตรวจรับ ห้องตรวจสุนัข 1-4']},
+  'ก.ค.w2': {rooms:['F1-CAT14','F1-CATROOM','F1-PHARM'], tasks:['D1:กั้นพื้นที่ ตรวจแมว 1-4 + รักษาแมว + จ่ายยา','D2:เดินสาย+ท่อ แมว 1-2 + จ่ายยา','D3:FCU แมว 1-2 + FCU จ่ายยา','D4:เดินสาย+ท่อ+FCU แมว 3-4 + รักษาแมว','D5:Condensing ทั้งหมด + Charge','D6:ทดสอบ+ตรวจรับ ทั้งกลุ่ม']},
+  'ก.ค.w3': {rooms:['F1-US','F1-XRAY','F1-ISO1'], tasks:['D1:ปรึกษาผู้เชี่ยวชาญรังสี + กั้นพื้นที่ US+XRay','D2:เดินสาย+ท่อ US + X-Ray (ระวังผนังตะกั่ว)','D3:FCU+Condensing US+XRay + Charge','D4:กั้นพื้นที่พิเศษ สัตว์ป่วยติดเชื้อ 1 (เช้า)','D5:เดินสาย+ท่อ+FCU ห้องสัตว์ป่วยติดเชื้อ 1']},
+  'ก.ค.w4': {rooms:['F1-ISO1','F1-ISO2','F1-ISO3'], tasks:['D1:Condensing+Charge สัตว์ป่วยติดเชื้อ 1','D2:กั้นพื้นที่+ดำเนินงาน สัตว์ป่วยติดเชื้อ 2','D3:FCU+Condensing+Charge สัตว์ป่วยติดเชื้อ 2','D4:กั้นพื้นที่+ดำเนินงาน สัตว์ป่วยติดเชื้อ 3 (ใหญ่สุด)','D5:FCU+Condensing+Charge สัตว์ป่วยติดเชื้อ 3','D6:ทดสอบระบบรวมทั้งอาคาร + ล้างท่อน้ำเย็นเดิม','D7:อบรมผู้ดูแล + ส่งมอบงานอย่างเป็นทางการ']},
+};
+
+const checks = {
+  electrical: [
+    'ท่อร้อยสาย (Conduit) ยึดแน่นตามมาตรฐาน',
+    'สายไฟเป็นยี่ห้อที่กำหนด (บางกอกเคเบิล/ไทยาซากิ/เฟ้ลปส์)',
+    'Circuit Breaker ย่อยติดตั้งครบทุกเครื่อง (Schneider/ABB)',
+    'ขนาด CB ถูกต้องตามขนาด BTU ของเครื่อง',
+    'ระบบไฟฟ้าตรงตามเฟส (1เฟส/3เฟส) ที่กำหนด',
+    'สายกราวด์ติดตั้งถูกต้องครบถ้วน',
+    'ทดสอบแรงดันไฟฟ้าที่จุดต่อ FCU และ Condensing',
+  ],
+  pipe: [
+    'ท่อน้ำยาเป็นทองแดงม้วน (Heavy Gauge) ขนาดถูกต้อง',
+    'ฉนวนหุ้มท่อน้ำยาหนาไม่ต่ำกว่า 3/4 นิ้ว',
+    'รอยต่อฉนวนสนิท ไม่มีช่องว่าง',
+    'ทำ Pressure Test ≥ 600 PSI ก่อน Charge น้ำยา',
+    'ท่อน้ำทิ้ง PVC Class 8.5 ลาดเอียงเหมาะสม (≥1:50)',
+    'ท่อน้ำทิ้งต่อถึงจุดระบายน้ำที่กำหนด ไม่มีน้ำขัง',
+    'การเจาะผ่านผนัง/ฝ้าอุดโป๊วเรียบร้อย',
+  ],
+  unit: [
+    'FCU แขวนใต้ฝ้าแน่นหนาตามโครงสร้าง',
+    'FCU ได้ระดับ (ถาดน้ำทิ้งไม่เอียง)',
+    'Condensing Unit ยึดกับโครงสร้างดาดฟ้าแน่น',
+    'Condensing Unit มีระยะห่างระบายอากาศเพียงพอ',
+    'รีโมทคอนโทรลไร้สายใช้งานได้ปกติ',
+    'Auto Swing ปรับทิศทางลมได้',
+    'Plasma Ionizer/Ionizer ติดตั้งและทำงานได้',
+    'ป้ายชื่อห้องติดที่ Condensing Unit บนดาดฟ้า',
+  ],
+  test: [
+    'ระบบเปิด-ปิดได้ปกติ ไม่มี Error Code',
+    'อุณหภูมิลมออกจาก FCU อยู่ในเกณฑ์ปกติ (≤18°C)',
+    'เสียงดังขณะทำงาน ≤ ค่าที่กำหนด (45-60dB ตามขนาด)',
+    'ระดับน้ำยาถูกต้อง (R32 หรือ R410A ตามรุ่น)',
+    'ตรวจสอบไม่มีการรั่วซึมของน้ำยา',
+    'ทดสอบการทำงานต่อเนื่อง 30 นาที ไม่ Trip',
+    'ทดสอบ Auto Restart ทำงานถูกต้อง',
+  ],
+  safety: [
+    'พื้นที่ทำความสะอาดเรียบร้อยหลังงาน',
+    'ไม่มีเศษวัสดุ/เศษสายไฟตกค้างในห้อง',
+    'ฝ้าเพดาน/ผนังที่เปิดออกปิดคืนสภาพ',
+    'ป้ายกั้นพื้นที่ถอดออกหมดแล้ว',
+    'ช่างสวม PPE ตลอดการทำงาน (บันทึกภาพ)',
+    'ไม่มีสายไฟยื่นออกมาเป็นอันตราย',
+  ],
+};
+
+let inspections = JSON.parse(localStorage.getItem('ac_inspections') || '[]');
+let insCounter = inspections.length + 1;
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (event && event.target) event.target.classList.add('active');
+  if (id === 'monthly') {
+    const activeTab = document.querySelector('#page-monthly .tab.active') || document.querySelector('#page-monthly .tab');
+    showMonth('may', activeTab);
+  }
+  if (id === 'gantt') buildGantt();
+  if (id === 'rooms') buildRoomsTable();
+  if (id === 'export') buildCSVs();
+  if (id === 'overview') buildProgressOverview();
+  if (id === 'inspect') buildInspectPage();
+  if (id === 'tracking') buildTracking();
+  if (id === 'daily') loadDailyPlan();
+  if (id === 'settings') buildSettingsPage();
+}
+
+// ============================================================
+// OVERVIEW PROGRESS
+// ============================================================
+// ============================================================
+// SYNC TOOLBAR — Push / Pull ปุ่มง่ายๆ
+// ============================================================
+function updateSyncToolbar(status, msg, time) {
+  const dot = document.getElementById('sync-status-dot');
+  const txt = document.getElementById('sync-status-text');
+  const ts  = document.getElementById('sync-last-time');
+  const colors = { ok:'#16a34a', error:'#dc2626', loading:'#f59e0b', offline:'#94a3b8' };
+  if (dot) dot.style.background = colors[status] || colors.offline;
+  if (txt) txt.textContent = msg || '';
+  if (ts && time) ts.textContent = 'อัปเดตล่าสุด: ' + time;
+}
+
+async function pullFromSheets() {
+  if (!getApiUrl()) {
+    alert('กรุณาตั้งค่า Apps Script URL ก่อน — ไปที่ ⚙️ ตั้งค่า');
+    return;
+  }
+  updateSyncToolbar('loading', '⬇ กำลังดึงข้อมูลจาก Sheets...');
+  setLoading(true);
+  try {
+    await loadRoomsFromSheets();
+    await loadInspectionsFromSheets();
+    insCounter = inspections.length + 1;
+    refreshAllViews();
+    const now = new Date().toLocaleTimeString('th-TH');
+    updateSyncToolbar('ok', '✅ โหลดจาก Sheets เรียบร้อย', now);
+    localStorage.setItem('ac_last_pull', now);
+  } catch(e) {
+    updateSyncToolbar('error', '❌ โหลดไม่สำเร็จ — ตรวจสอบการเชื่อมต่อ');
+  } finally {
+    setLoading(false);
+  }
+}
+
+async function pushToSheets() {
+  if (!getApiUrl()) {
+    alert('กรุณาตั้งค่า Apps Script URL ก่อน — ไปที่ ⚙️ ตั้งค่า');
+    return;
+  }
+  if (!isUnlocked) { unlockToEdit('general'); return; }
+  updateSyncToolbar('loading', '⬆ กำลังบันทึกขึ้น Sheets...');
+  setLoading(true);
+  let ok = 0;
+  try {
+    const r1 = await apiPost('rooms', 'overwrite', customRooms);
+    if (r1?.status === 'ok') ok++;
+    const ins = JSON.parse(localStorage.getItem('ac_inspections') || '[]');
+    const r2 = await apiPost('inspections', 'overwrite', ins);
+    if (r2?.status === 'ok') ok++;
+    const logs = JSON.parse(localStorage.getItem('ac_daily_logs') || '[]');
+    const r3 = await apiPost('daily_logs', 'overwrite', logs);
+    if (r3?.status === 'ok') ok++;
+    const now = new Date().toLocaleTimeString('th-TH');
+    if (ok === 3) {
+      updateSyncToolbar('ok', `✅ บันทึกขึ้น Sheets เรียบร้อย (${ok}/3 ชุด)`, now);
+      localStorage.setItem('ac_last_push', now);
+    } else {
+      updateSyncToolbar('error', `⚠️ บันทึกสำเร็จ ${ok}/3 ชุด — ลองอีกครั้ง`);
+    }
+  } catch(e) {
+    updateSyncToolbar('error', '❌ บันทึกไม่สำเร็จ — ตรวจสอบการเชื่อมต่อ');
+  } finally {
+    setLoading(false);
+  }
+}
+
+function refreshAllViews() {
+  buildProgressOverview();
+  buildRoomsTable();
+  loadDailyPlan();
+  buildTracking();
+  buildInspectPage();
+  if (document.getElementById('page-dashboard').classList.contains('active')) buildDashboard();
+  if (document.getElementById('page-monthly').classList.contains('active')) showMonth('may', document.querySelector('#page-monthly .tab'));
+  if (document.getElementById('page-gantt').classList.contains('active')) buildGantt();
+}
+
+// ============================================================
+// OVERVIEW — Dynamic from customRooms
+// ============================================================
+function buildProgressOverview() {
+  const totalMachines = customRooms.reduce((a,r) => a + (parseInt(r.qty)||0), 0);
+  const totalRooms = customRooms.length;
+  const passIds = [...new Set(inspections.filter(i=>i.result==='pass').map(i=>i.roomId))];
+  const doneRooms = customRooms.filter(r => passIds.includes(r.id)).length;
+  const doneMachines = customRooms.filter(r => passIds.includes(r.id)).reduce((a,r)=>a+(parseInt(r.qty)||0),0);
+  const overallPct = totalRooms ? Math.round(doneRooms / totalRooms * 100) : 0;
+
+  // Stat cards
+  const statsEl = document.getElementById('overview-stats');
+  if (statsEl) {
+    // Compute date range from customRooms
+    const sds = customRooms.filter(r=>r.startDate).map(r=>r.startDate).sort();
+    const eds = customRooms.filter(r=>r.endDate).map(r=>r.endDate).sort();
+    const firstDate = sds[0] ? new Date(sds[0]).toLocaleDateString('th-TH',{day:'numeric',month:'short'}) : '—';
+    const lastDate = eds[eds.length-1] ? new Date(eds[eds.length-1]).toLocaleDateString('th-TH',{day:'numeric',month:'short'}) : '—';
+    const floors = [...new Set(customRooms.map(r=>r.floor))].length;
+    statsEl.innerHTML = `
+      <div class="stat-card"><div class="stat-num" style="color:var(--primary-light)">${totalMachines}</div><div class="stat-label">เครื่องทั้งหมด</div><div class="stat-sub">${totalRooms} ตำแหน่ง</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:var(--success)">${doneMachines}</div><div class="stat-label">ติดตั้งเสร็จ</div><div class="stat-sub">${overallPct}% ของแผน</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:var(--warn)">${floors}</div><div class="stat-label">ชั้น + พื้นที่</div><div class="stat-sub">ในอาคาร</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:var(--danger);font-size:16px">${firstDate}</div><div class="stat-label">วันเริ่ม → สิ้นสุด</div><div class="stat-sub">${lastDate}</div></div>`;
+  }
+
+  // Notice
+  const noticeEl = document.getElementById('overview-notice');
+  const highNoise = customRooms.filter(r=>r.noise==='high').map(r=>r.name);
+  if (noticeEl) {
+    noticeEl.innerHTML = `ℹ <span>รวม ${totalRooms} ห้อง / ${totalMachines} เครื่อง | 
+      เสร็จแล้ว ${doneRooms} ห้อง | 
+      ห้องเสียงดัง ${highNoise.length} ห้อง (ต้องแยกวัน) | 
+      ชั้น 1-2 ต้องกั้นพื้นที่ทุกครั้ง</span>`;
+  }
+
+  // Monthly table — dynamic from customRooms
+  const monthlyEl = document.getElementById('overview-monthly-table');
+  if (monthlyEl) {
+    const thaiM = {'2026-05':'พฤษภาคม 2569','2026-06':'มิถุนายน 2569','2026-07':'กรกฎาคม 2569','2026-08':'สิงหาคม 2569','2026-09':'กันยายน 2569'};
+    const monthEmoji = {'2026-05':'🟢','2026-06':'🟡','2026-07':'🟠','2026-08':'🔴','2026-09':'🟣'};
+    const byMonth = {};
+    customRooms.forEach(r => {
+      const mk = r.startDate ? r.startDate.slice(0,7) : null;
+      if (!mk) return;
+      if (!byMonth[mk]) byMonth[mk] = [];
+      byMonth[mk].push(r);
+    });
+    let tbl = `<table class="data-table"><thead><tr><th>เดือน</th><th>ห้อง</th><th>เครื่อง</th><th>เสียงดัง</th><th>สถานะ</th></tr></thead><tbody>`;
+    Object.keys(byMonth).sort().forEach(mk => {
+      const mrs = byMonth[mk];
+      const mLabel = thaiM[mk] || mk;
+      const emoji = monthEmoji[mk] || '⚫';
+      const totalM = mrs.reduce((a,r)=>a+(parseInt(r.qty)||0),0);
+      const highN = mrs.filter(r=>r.noise==='high').length;
+      const done = mrs.filter(r=>passIds.includes(r.id)).length;
+      const pct = Math.round(done/mrs.length*100);
+      tbl += `<tr><td colspan="5" class="group-row">${emoji} ${mLabel} — ${mrs.length} ห้อง / ${totalM} เครื่อง</td></tr>`;
+      mrs.forEach(r => {
+        const sd = r.startDate ? new Date(r.startDate).toLocaleDateString('th-TH',{day:'numeric',month:'short'}) : '—';
+        const ed = r.endDate ? new Date(r.endDate).toLocaleDateString('th-TH',{day:'numeric',month:'short'}) : '—';
+        const nb = r.noise==='high'?'<span class="badge badge-red">สูง</span>':r.noise==='medium'?'<span class="badge badge-amber">กลาง</span>':'<span class="badge badge-green">น้อย</span>';
+        tbl += `<tr>
+          <td style="font-size:11px;color:var(--text2)">${sd}–${ed}</td>
+          <td style="font-weight:500">${r.name}</td>
+          <td style="text-align:center">${r.qty}</td>
+          <td>${nb}</td>
+          <td>${getStatus(r.id)}</td>
+        </tr>`;
+      });
+    });
+    tbl += '</tbody></table>';
+    monthlyEl.innerHTML = tbl;
+  }
+
+  // Last updated
+  const luEl = document.getElementById('overview-last-updated');
+  if (luEl) luEl.textContent = 'อัปเดต ' + new Date().toLocaleTimeString('th-TH');
+
+  // Progress bars by zone
+  const zoneColorMap = {'ห้องประชุม':'#0369a1','ทางเดิน':'#b45309','ห้องปฏิบัติการ':'#15803d','คลังยา':'#15803d','ห้องตรวจ':'#1d4ed8','ห้องผ่าตัด':'#b91c1c','สำนักงาน':'#7c3aed','ห้องตรวจสุนัข':'#b45309','ห้องตรวจแมว':'#b45309','ห้องรักษา':'#b45309','ห้องจ่ายยา':'#b45309','สัตว์ป่วยติดเชื้อ':'#dc2626','Ventilation':'#15803d'};
+  const zoneMap = {};
+  customRooms.forEach(r => { if (!zoneMap[r.zone]) zoneMap[r.zone]=[]; zoneMap[r.zone].push(r.id); });
+  let html = '<div style="display:flex;flex-direction:column;gap:10px">';
+  let totalDone2 = 0;
+  Object.entries(zoneMap).forEach(([zone, ids]) => {
+    const done2 = ids.filter(id => passIds.includes(id)).length;
+    const pct2 = Math.round(done2/ids.length*100);
+    totalDone2 += done2;
+    const color = zoneColorMap[zone] || 'var(--primary-light)';
+    html += `<div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+        <span style="font-size:13px;font-weight:500">${zone}</span>
+        <span style="font-size:12px;color:var(--text2)">${done2}/${ids.length} ห้อง — ${pct2}%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct2}%;background:${color}"></div></div>
+    </div>`;
+  });
+  const overall2 = totalRooms ? Math.round(totalDone2/totalRooms*100) : 0;
+  document.getElementById('overall-pct').textContent = overall2 + '%';
+  html += '</div>';
+  document.getElementById('progress-overview').innerHTML = html;
+
+  // Sync toolbar status
+  if (getApiUrl()) {
+    const lastPull = localStorage.getItem('ac_last_pull');
+    updateSyncToolbar('ok', '✅ เชื่อมต่อ Sheets แล้ว', lastPull || '—');
+  } else {
+    updateSyncToolbar('offline', '⚫ ออฟไลน์ — ยังไม่ได้เชื่อมต่อ Sheets');
+  }
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function buildDashboard() {
+  const total = customRooms.reduce((a,r) => a+r.qty, 0);
+  const passIds = [...new Set(inspections.filter(i=>i.result==='pass').map(i=>i.roomId))];
+  const failIds = [...new Set(inspections.filter(i=>i.result==='fail').map(i=>i.roomId))];
+  const condIds = [...new Set(inspections.filter(i=>i.result==='conditional').map(i=>i.roomId))];
+  const doneQty = customRooms.filter(r=>passIds.includes(r.id)).reduce((a,r)=>a+r.qty,0);
+  const pct = Math.round(doneQty/total*100);
+
+  // Stats
+  document.getElementById('db-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-num" style="color:var(--primary-light)">${total}</div><div class="stat-label">เครื่องทั้งหมด</div><div class="stat-sub">37 เครื่อง / 25 ตำแหน่ง</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--success)">${doneQty}</div><div class="stat-label">ติดตั้งเสร็จ (เครื่อง)</div><div class="stat-sub">${pct}% ของแผนทั้งหมด</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--danger)">${failIds.length}</div><div class="stat-label">ห้องที่ต้องแก้ไข</div><div class="stat-sub">บันทึกจากใบตรวจงาน</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--warn)">${inspections.length}</div><div class="stat-label">ใบตรวจงานทั้งหมด</div><div class="stat-sub">บันทึกในระบบ</div></div>
+  `;
+
+  // Zone progress — built from customRooms dynamically
+  const zoneColorMap = {'ห้องประชุม':'#0369a1','ทางเดิน':'#b45309','ห้องปฏิบัติการ':'#15803d','คลังยา':'#15803d','ห้องตรวจ':'#1d4ed8','ห้องผ่าตัด':'#b91c1c','สำนักงาน':'#7c3aed','ห้องตรวจสุนัข':'#b45309','ห้องตรวจแมว':'#b45309','ห้องรักษา':'#b45309','ห้องจ่ายยา':'#b45309','สัตว์ป่วยติดเชื้อ':'#dc2626','Ventilation':'#15803d'};
+  const zoneGroups = {};
+  customRooms.forEach(r => { if (!zoneGroups[r.zone]) zoneGroups[r.zone]=[]; zoneGroups[r.zone].push(r.id); });
+  let zpHtml = '';
+  Object.entries(zoneGroups).forEach(([zone, ids]) => {
+    const done = ids.filter(id => passIds.includes(id)).length;
+    const pct2 = ids.length ? Math.round(done/ids.length*100) : 0;
+    const hasFail = ids.some(id => failIds.includes(id));
+    zpHtml += `<div style="margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:12px;font-weight:500">${zone}</span>
+        <span style="font-size:11px;color:var(--text2)">${done}/${ids.length} ${hasFail?'<span class="badge badge-red" style="margin-left:4px">มีปัญหา</span>':''}</span>
+      </div>
+      <div style="background:#e2e8f0;height:10px;border-radius:5px;overflow:hidden">
+        <div style="height:100%;width:${pct2}%;background:${zoneColorMap[zone]||'#888'};border-radius:5px;transition:width 0.4s"></div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('db-zone-progress').innerHTML = zpHtml || '<p style="color:var(--text3);font-size:13px">ยังไม่มีข้อมูล</p>';
+
+  // Timeline
+  const now = new Date();
+  const projectStart = new Date(2026, 4, 1); // May 1
+  const projectEnd = new Date(2026, 6, 31);  // July 31
+  const totalDays = (projectEnd - projectStart) / 86400000;
+  const elapsed = Math.max(0, Math.min(totalDays, (now - projectStart) / 86400000));
+  const elapsedPct = Math.round(elapsed / totalDays * 100);
+
+  const milestones = [
+    {label:'เริ่มโครงการ', date:'1 พ.ค. 2569', pct:0, done:true},
+    {label:'ชั้น 3 + AHU เสร็จ', date:'31 พ.ค. 2569', pct:33, done: now > new Date(2026,4,31)},
+    {label:'ชั้น 2 + สำนักงาน เสร็จ', date:'30 มิ.ย. 2569', pct:66, done: now > new Date(2026,5,30)},
+    {label:'ส่งมอบงาน', date:'31 ก.ค. 2569', pct:100, done: now > new Date(2026,6,31)},
+  ];
+
+  let tlHtml = `<div style="margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text2);margin-bottom:4px">
+      <span>1 พ.ค. 2569</span><span>วันนี้ (${elapsedPct}%)</span><span>31 ก.ค. 2569</span>
+    </div>
+    <div style="background:#e2e8f0;height:12px;border-radius:6px;overflow:hidden;position:relative">
+      <div style="height:100%;width:${elapsedPct}%;background:linear-gradient(90deg,var(--primary-light),var(--accent));border-radius:6px"></div>
+    </div>
+    <div style="font-size:11px;color:var(--text2);margin-top:4px">ผ่านมาแล้ว ${Math.round(elapsed)} วัน จาก ${totalDays} วัน</div>
+  </div>`;
+
+  milestones.forEach(m => {
+    tlHtml += `<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid #f1f5f9">
+      <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;${m.done?'background:var(--success);color:#fff':'background:#e2e8f0;color:var(--text3)'}">${m.done?'✓':'○'}</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:${m.done?'500':'400'};color:${m.done?'var(--text)':'var(--text2)'}">${m.label}</div>
+      <div style="font-size:11px;color:var(--text3)">${m.date}</div></div>
+      <span class="badge ${m.done?'badge-green':'badge-gray'}">${m.done?'เสร็จแล้ว':'รอดำเนินการ'}</span>
+    </div>`;
+  });
+  document.getElementById('db-timeline').innerHTML = tlHtml;
+
+  // Issues
+  const failRooms = customRooms.filter(r => failIds.includes(r.id));
+  const condRooms = customRooms.filter(r => condIds.includes(r.id) && !passIds.includes(r.id));
+  const pending = rooms.filter(r => !passIds.includes(r.id) && !failIds.includes(r.id) && !condIds.includes(r.id));
+
+  let issHtml = '';
+  if (!failRooms.length && !condRooms.length) {
+    issHtml = '<div class="notice notice-success">✅ ไม่มีห้องที่ต้องแก้ไขในขณะนี้</div>';
+  }
+  failRooms.forEach(r => {
+    const lastIns = [...inspections].reverse().find(i => i.roomId === r.id && i.result === 'fail');
+    issHtml += `<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #fee2e2;align-items:flex-start">
+      <span style="font-size:16px">❌</span>
+      <div><div style="font-size:13px;font-weight:500;color:var(--danger)">${r.name}</div>
+      <div style="font-size:11px;color:var(--text2)">กำหนดแก้ไข: ${lastIns?.deadline||'ไม่ระบุ'} | ${lastIns?.note?.slice(0,50)||''}</div></div>
+    </div>`;
+  });
+  condRooms.forEach(r => {
+    issHtml += `<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #fef3c7;align-items:flex-start">
+      <span style="font-size:16px">⚠️</span>
+      <div><div style="font-size:13px;font-weight:500;color:var(--warn)">${r.name}</div>
+      <div style="font-size:11px;color:var(--text2)">ผ่านมีเงื่อนไข — รอตรวจซ้ำ</div></div>
+    </div>`;
+  });
+  if (!issHtml) issHtml = '<p style="color:var(--text3);font-size:13px">ไม่มีปัญหา</p>';
+  document.getElementById('db-issues').innerHTML = issHtml;
+
+  // Recent inspections
+  const recent = [...inspections].reverse().slice(0, 5);
+  const rl = {pass:'badge-green',conditional:'badge-amber',fail:'badge-red'};
+  const rt = {pass:'✅ ผ่าน',conditional:'⚠ มีเงื่อนไข',fail:'❌ ไม่ผ่าน'};
+  let recHtml = recent.length ? recent.map(ins => `
+    <div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #f1f5f9;align-items:center">
+      <span class="badge ${rl[ins.result]||'badge-gray'}">${rt[ins.result]||ins.result}</span>
+      <div style="flex:1"><div style="font-size:13px;font-weight:500">${ins.roomName}</div>
+      <div style="font-size:11px;color:var(--text2)">${ins.date} | ${ins.step.slice(0,25)}</div></div>
+    </div>`).join('') : '<p style="color:var(--text3);font-size:13px">ยังไม่มีการตรวจ</p>';
+  document.getElementById('db-recent').innerHTML = recHtml;
+}
+
+// ============================================================
+// ENHANCED DAILY PLAN — Timeline view + work log
+// ============================================================
+function loadDailyPlan() {
+  const val = document.getElementById('daily-date').value;
+  if (!val) return;
+  const d = new Date(val);
+  const day = d.getDay();
+  const dom = document.getElementById('daily-content');
+  const monthNames = ['','ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const dayNamesFull = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+  const m = d.getMonth() + 1;
+  const dom2 = d.getDate();
+  const thaiDate = `วัน${dayNamesFull[day]}ที่ ${dom2} ${monthNames[m]} ${d.getFullYear() + 543}`;
+
+  if (day === 0 || day === 6) {
+    dom.innerHTML = `<div style="margin-bottom:12px"><h2 style="font-size:18px;font-weight:600;color:var(--primary)">${thaiDate}</h2></div>
+      <div class="notice notice-warn">⚠ วันหยุดสุดสัปดาห์ — ไม่มีแผนงานปกติ หากมีงานเร่งด่วน ต้องได้รับอนุมัติจากผู้ควบคุมงานก่อน</div>`;
+    return;
+  }
+
+  let monthKey = '', weekNum = 0;
+  if (m === 5) { monthKey = 'พ.ค.'; weekNum = dom2 <= 7 ? 1 : dom2 <= 14 ? 2 : dom2 <= 21 ? 3 : 4; }
+  else if (m === 6) { monthKey = 'มิ.ย.'; weekNum = dom2 <= 7 ? 1 : dom2 <= 14 ? 2 : dom2 <= 21 ? 3 : 4; }
+  else if (m === 7) { monthKey = 'ก.ค.'; weekNum = dom2 <= 7 ? 1 : dom2 <= 14 ? 2 : dom2 <= 21 ? 3 : 4; }
+  else { dom.innerHTML = `<div style="margin-bottom:12px"><h2 style="font-size:18px;font-weight:600;color:var(--primary)">${thaiDate}</h2></div><div class="notice notice-warn">⚠ วันนี้อยู่นอกช่วงโครงการ (พ.ค.–ก.ค. 2569)</div>`; return; }
+
+  const wkey = monthKey + 'w' + weekNum;
+  const plan = weekPlan[wkey];
+  const dayN = day;
+  const todayTasks = (plan?.tasks||[]).filter(t=>{const mm=t.match(/^D(\d+):/);return mm&&parseInt(mm[1])===dayN;}).map(t=>t.replace(/^D\d+:/,''));
+  const generalTasks = (plan?.tasks||[]).filter(t=>!t.match(/^D\d+:/));
+  const allDayTasks = [...todayTasks, ...generalTasks];
+  const todayRooms = (plan?.rooms||[]).map(id=>rooms.find(r=>r.id===id)).filter(Boolean);
+  const hasHighNoise = todayRooms.some(r=>r.noise==='high');
+  const hasMedNoise = todayRooms.some(r=>r.noise==='medium');
+
+  const schedule = [
+    {time:'07:30',label:'เตรียมพื้นที่ + ตรวจ Drawing + เช็คอุปกรณ์',type:'prep',dur:60},
+    {time:'08:30',label:'เริ่มงานหลัก — เดินท่อ / สายไฟ / ติดตั้ง FCU',type:'work',dur:180},
+    {time:'11:30',label:'หยุดงานที่มีเสียงดัง (ห้องโรงพยาบาลมีคนไข้)',type:'break',dur:30},
+    {time:'12:00',label:'พักกลางวัน',type:'lunch',dur:60},
+    {time:'13:00',label:'งานต่อเนื่อง (ช่วงบ่าย) — ติดตั้ง Condensing / ต่อสาย',type:'work',dur:180},
+    {time:'16:00',label:'หยุดงานเสียงดัง / Vacuum + Charge + ทดสอบ',type:'end',dur:60},
+    {time:'17:00',label:'ทำความสะอาด + บันทึกรายงาน + ส่งรูป',type:'prep',dur:30},
+  ];
+  const typeColor={prep:'#e0f2fe',work:'#dcfce7',break:'#fef9c3',lunch:'#fef3c7',end:'#fee2e2'};
+  const typeText={prep:'#0369a1',work:'#15803d',break:'#a16207',lunch:'#b45309',end:'#b91c1c'};
+
+  let html = `<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+    <div><h2 style="font-size:18px;font-weight:600;color:var(--primary)">${thaiDate}</h2>
+    <div style="color:var(--text2);font-size:13px;margin-top:2px">${monthKey} สัปดาห์ที่ ${weekNum} | วันทำงาน</div></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      ${hasHighNoise?'<span class="badge badge-red">⚠ เสียงดัง</span>':''}
+      ${hasMedNoise&&!hasHighNoise?'<span class="badge badge-amber">กั้นพื้นที่</span>':''}
+      <span class="badge badge-blue">${todayRooms.length} พื้นที่</span>
+      <button class="btn btn-sm btn-outline" onclick="window.print()">🖨 พิมพ์</button>
+    </div>
+  </div>`;
+
+  if (hasHighNoise) html += '<div class="notice notice-warn" style="margin-bottom:12px">🔊 วันนี้มีงานเสียงดัง — กั้นพาร์ทิชันให้เสร็จก่อน 08:30 น. / หยุดงานเสียงดังทันที 11:30 น. และ 16:00 น. / แจ้ง Line กลุ่มอาคารก่อนเริ่ม</div>';
+
+  html += '<div class="grid2" style="margin-bottom:16px">';
+  // Schedule
+  html += `<div class="card" style="margin:0"><div class="card-header"><div class="card-title">⏰ ตารางเวลาทำงาน</div></div><div class="card-body" style="padding:10px 16px">`;
+  schedule.forEach(s => {
+    html += `<div style="display:flex;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid #f1f5f9">
+      <div style="width:44px;font-size:11px;font-weight:700;color:var(--text2);flex-shrink:0">${s.time}</div>
+      <div style="flex:1;padding:4px 8px;border-radius:5px;font-size:12px;background:${typeColor[s.type]};color:${typeText[s.type]}">${s.label}</div>
+      <div style="font-size:10px;color:var(--text3);white-space:nowrap">${s.dur} น.</div>
+    </div>`;
+  });
+  html += '</div></div>';
+  // Tasks
+  html += `<div class="card" style="margin:0"><div class="card-header"><div class="card-title">🔧 งานวันนี้ (${allDayTasks.length} รายการ)</div></div><div class="card-body">`;
+  if (allDayTasks.length) {
+    allDayTasks.forEach((task,i) => { html += `<div style="display:flex;gap:8px;padding:7px 0;border-bottom:1px solid #f1f5f9;align-items:flex-start"><div style="width:22px;height:22px;border-radius:50%;background:var(--primary-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;margin-top:1px">${i+1}</div><span style="font-size:13px">${task}</span></div>`; });
+  } else { html += '<p style="color:var(--text3);font-size:13px">ดำเนินงานตามแผนสัปดาห์ทั่วไป</p>'; }
+  html += '</div></div></div>';
+
+  if (todayRooms.length) {
+    html += `<div class="card" style="margin-bottom:16px"><div class="card-header"><div class="card-title">📍 ห้องที่ดำเนินการสัปดาห์นี้</div></div><div class="card-body" style="padding:0;overflow-x:auto"><table class="data-table"><thead><tr><th>ห้อง</th><th>ชั้น</th><th>BTU/hr</th><th>เฟส</th><th>เสียง</th><th>สถานะ</th><th>หมายเหตุ</th></tr></thead><tbody>`;
+    todayRooms.forEach(r => {
+      const nb = r.noise==='high'?'<span class="badge badge-red">สูง</span>':r.noise==='medium'?'<span class="badge badge-amber">กลาง</span>':'<span class="badge badge-green">น้อย</span>';
+      html += `<tr><td style="font-weight:500">${r.name}</td><td>${r.floor}</td><td>${r.btu?r.btu.toLocaleString():'—'}</td><td>${r.phase} เฟส</td><td>${nb}</td><td>${getStatus(r.id)}</td><td style="font-size:11px;color:var(--text2)">${r.note}</td></tr>`;
+    });
+    html += '</tbody></table></div></div>';
+  }
+
+  html += `<div class="card"><div class="card-header"><div class="card-title">✅ Checklist ประจำวัน</div></div><div class="card-body">
+    <div class="grid2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--border)">📌 ก่อนเริ่มงาน</div>
+        <div class="check-row"><input type="checkbox" id="pre0"><label for="pre0">ตรวจสอบ Drawing ก่อนเดินท่อ</label></div><div class="check-row"><input type="checkbox" id="pre1"><label for="pre1">กั้นพาร์ทิชัน + ติดป้ายประกาศ</label></div><div class="check-row"><input type="checkbox" id="pre2"><label for="pre2">แจ้ง Line กลุ่มอาคาร</label></div><div class="check-row"><input type="checkbox" id="pre3"><label for="pre3">เตรียม PPE ครบ (หมวก แว่น ถุงมือ รองเท้า)</label></div><div class="check-row"><input type="checkbox" id="pre4"><label for="pre4">เตรียมเครื่องมือ: สว่าน กรรไกรท่อ มัลติมิเตอร์</label></div><div class="check-row"><input type="checkbox" id="pre5"><label for="pre5">แจ้ง Safety Officer (ห้องติดเชื้อ/X-Ray)</label></div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--border)">📌 หลังเสร็จงาน</div>
+        <div class="check-row"><input type="checkbox" id="post0"><label for="post0">ทำความสะอาดพื้นที่</label></div><div class="check-row"><input type="checkbox" id="post1"><label for="post1">เก็บเศษวัสดุ/สายไฟทั้งหมด</label></div><div class="check-row"><input type="checkbox" id="post2"><label for="post2">ปิดฝ้า/ผนังที่เปิดออก</label></div><div class="check-row"><input type="checkbox" id="post3"><label for="post3">ถ่ายรูปหลักฐาน (ก่อน-ระหว่าง-หลัง)</label></div><div class="check-row"><input type="checkbox" id="post4"><label for="post4">บันทึกใบตรวจงาน Online</label></div><div class="check-row"><input type="checkbox" id="post5"><label for="post5">แจ้งผู้ควบคุมงานตรวจรับ</label></div><div class="check-row"><input type="checkbox" id="post6"><label for="post6">ถอดป้ายกั้นพื้นที่และเปิดพื้นที่คืน</label></div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+      <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px">📝 บันทึกรายงานประจำวัน</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">ผู้ควบคุมงาน</label><input type="text" class="form-input" id="dl-supervisor" placeholder="ชื่อ-นามสกุล"></div>
+        <div class="form-group"><label class="form-label">ผู้รับเหมา/ทีมช่าง</label><input type="text" class="form-input" id="dl-contractor" placeholder="บริษัท/ชื่อช่าง"></div>
+      </div>
+      <div class="form-row full"><div class="form-group"><label class="form-label">สรุปงานที่ทำวันนี้</label><textarea class="form-input form-textarea" id="dl-summary" placeholder="สรุปงานที่ดำเนินการ ปัญหาที่พบ และแนวทางแก้ไข..."></textarea></div></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">% งานสำเร็จวันนี้</label><select class="form-select" id="dl-pct"><option>25%</option><option>50%</option><option>75%</option><option>100%</option></select></div>
+        <div class="form-group"><label class="form-label">ปัญหา/อุปสรรค</label><input type="text" class="form-input" id="dl-issue" placeholder="ถ้ามี"></div>
+      </div>
+      <button class="btn btn-success" onclick="saveDailyLog('${val}','${thaiDate}')">💾 บันทึกรายงานประจำวัน</button>
+    </div>
+  </div></div>`;
+
+  const logs = JSON.parse(localStorage.getItem('ac_daily_logs')||'[]').filter(l=>l.date===val);
+  if (logs.length) {
+    html += `<div class="card"><div class="card-header"><div class="card-title">📁 บันทึกของวันนี้ (${logs.length} รายการ)</div></div><div class="card-body">`;
+    logs.forEach(l => { html += `<div style="padding:8px;border:1px solid var(--border);border-radius:6px;margin-bottom:8px;font-size:13px"><div style="font-weight:500">${l.thaiDate} | ${l.supervisor||'—'} | ${l.pct} สำเร็จ</div><div style="color:var(--text2);margin-top:4px">${l.summary||'ไม่มีบันทึก'}</div>${l.issue?`<div style="color:var(--danger);font-size:12px;margin-top:2px">⚠ ${l.issue}</div>`:''}</div>`; });
+    html += '</div></div>';
+  }
+  dom.innerHTML = html;
+}
+
+function saveDailyLog(date, thaiDate) {
+  requirePin('ใส่รหัสเพื่อบันทึกรายงานประจำวัน', () => {
+    const logs = JSON.parse(localStorage.getItem('ac_daily_logs')||'[]');
+    logs.push({ date, thaiDate, supervisor:document.getElementById('dl-supervisor')?.value||'', contractor:document.getElementById('dl-contractor')?.value||'', summary:document.getElementById('dl-summary')?.value||'', pct:document.getElementById('dl-pct')?.value||'', issue:document.getElementById('dl-issue')?.value||'', savedAt:new Date().toISOString() });
+    localStorage.setItem('ac_daily_logs', JSON.stringify(logs));
+    alert('บันทึกรายงานประจำวันเรียบร้อย ✅');
+    loadDailyPlan();
+  })();
+}
+
+// ============================================================
+// SHARED HELPERS — date-based room lookup using customRooms
+// ============================================================
+function getRoomsOnDate(dateObj) {
+  // Returns rooms (from customRooms) that are active on dateObj
+  const t = dateObj.getTime();
+  return customRooms.filter(r => {
+    if (!r.startDate || !r.endDate) return false;
+    const s = new Date(r.startDate).getTime();
+    const e = new Date(r.endDate).getTime();
+    // Expand end by 1 day to be inclusive
+    return t >= s && t <= e + 86400000;
+  });
+}
+
+function getRoomsInRange(y, m, startDay, endDay) {
+  const active = [];
+  customRooms.forEach(r => {
+    if (!r.startDate || !r.endDate) return;
+    const rs = parseLocalDate(r.startDate);
+    const re = parseLocalDate(r.endDate);
+    if (!rs || !re) return;
+    const ws = new Date(y, m, startDay).getTime();
+    const we = new Date(y, m, endDay, 23, 59).getTime();
+    if (rs.getTime() <= we && re.getTime() >= ws) active.push(r);
+  });
+  return active;
+}
+
+function getStatusBadge(id) { return getStatus(id); }
+
+// ============================================================
+// DAILY PLAN — uses customRooms with real startDate/endDate
+// ============================================================
+function loadDailyPlan() {
+  const val = document.getElementById('daily-date').value;
+  if (!val) return;
+  const d = new Date(val + 'T00:00:00');
+  const day = d.getDay();
+  const dom = document.getElementById('daily-content');
+  const monthNames = ['','ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const dayNamesFull = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+  const m = d.getMonth() + 1;
+  const dom2 = d.getDate();
+  const thaiDate = `วัน${dayNamesFull[day]}ที่ ${dom2} ${monthNames[m]} ${d.getFullYear() + 543}`;
+
+  if (day === 0 || day === 6) {
+    dom.innerHTML = `<div style="margin-bottom:12px"><h2 style="font-size:18px;font-weight:600;color:var(--primary)">${thaiDate}</h2></div>
+      <div class="notice notice-warn">⚠ วันหยุดสุดสัปดาห์ — ไม่มีแผนงานปกติ หากมีงานเร่งด่วน ต้องได้รับอนุมัติจากผู้ควบคุมงานก่อน</div>`;
+    return;
+  }
+
+  // Get rooms active today from customRooms using real dates
+  const todayRooms = getRoomsOnDate(d);
+  const hasHighNoise = todayRooms.some(r => r.noise === 'high');
+  const hasMedNoise = todayRooms.some(r => r.noise === 'medium');
+
+  // Project date range check
+  const projStart = new Date('2026-05-12T00:00:00');
+  const projEnd = new Date('2026-09-08T23:59:59');
+  const inProject = d >= projStart && d <= projEnd;
+
+  const schedule = [
+    {time:'07:30',label:'เตรียมพื้นที่ + ตรวจ Drawing + เช็คอุปกรณ์',type:'prep',dur:60},
+    {time:'08:30',label:'เริ่มงานหลัก — เดินท่อ / สายไฟ / ติดตั้ง FCU',type:'work',dur:180},
+    {time:'11:30',label:'หยุดงานที่มีเสียงดัง (ห้องโรงพยาบาลมีคนไข้)',type:'break',dur:30},
+    {time:'12:00',label:'พักกลางวัน',type:'lunch',dur:60},
+    {time:'13:00',label:'งานต่อเนื่อง (ช่วงบ่าย) — ติดตั้ง Condensing / ต่อสาย',type:'work',dur:180},
+    {time:'16:00',label:'หยุดงานเสียงดัง / Vacuum + Charge + ทดสอบ',type:'end',dur:60},
+    {time:'17:00',label:'ทำความสะอาด + บันทึกรายงาน + ส่งรูป',type:'prep',dur:30},
+  ];
+  const typeColor = {prep:'#e0f2fe',work:'#dcfce7',break:'#fef9c3',lunch:'#fef3c7',end:'#fee2e2'};
+  const typeText = {prep:'#0369a1',work:'#15803d',break:'#a16207',lunch:'#b45309',end:'#b91c1c'};
+
+  let html = `<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+    <div><h2 style="font-size:18px;font-weight:600;color:var(--primary)">${thaiDate}</h2>
+    <div style="color:var(--text2);font-size:13px;margin-top:2px">${monthNames[m]} ${d.getFullYear()+543} | ${inProject?'วันทำงานในโครงการ':'นอกช่วงโครงการ'}</div></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      ${hasHighNoise?'<span class="badge badge-red">⚠ เสียงดัง</span>':''}
+      ${hasMedNoise&&!hasHighNoise?'<span class="badge badge-amber">กั้นพื้นที่</span>':''}
+      <span class="badge badge-blue">${todayRooms.length} ห้อง</span>
+      <button class="btn btn-sm btn-outline" onclick="window.print()">🖨 พิมพ์</button>
+    </div>
+  </div>`;
+
+  if (!inProject) {
+    html += '<div class="notice notice-warn">⚠ วันที่นี้อยู่นอกช่วงโครงการ (12 พ.ค. – 8 ก.ย. 2569)</div>';
+    dom.innerHTML = html; return;
+  }
+  if (!todayRooms.length) {
+    html += '<div class="notice notice-info">ℹ ไม่มีห้องที่อยู่ในแผนสำหรับวันนี้โดยตรง อาจเป็นช่วงเตรียมงาน/สรุปงาน/ส่งมอบ</div>';
+  }
+
+  if (hasHighNoise) html += '<div class="notice notice-warn" style="margin-bottom:12px">🔊 วันนี้มีงานเสียงดัง — กั้นพาร์ทิชันก่อน 08:30 น. / หยุดงานเสียงดังทันที 11:30 น. และ 16:00 น. / แจ้ง Line กลุ่มอาคาร</div>';
+
+  html += '<div class="grid2" style="margin-bottom:16px">';
+  html += `<div class="card" style="margin:0"><div class="card-header"><div class="card-title">⏰ ตารางเวลาทำงาน</div></div><div class="card-body" style="padding:10px 16px">`;
+  schedule.forEach(s => {
+    html += `<div style="display:flex;gap:10px;align-items:center;padding:5px 0;border-bottom:1px solid #f1f5f9">
+      <div style="width:44px;font-size:11px;font-weight:700;color:var(--text2);flex-shrink:0">${s.time}</div>
+      <div style="flex:1;padding:4px 8px;border-radius:5px;font-size:12px;background:${typeColor[s.type]};color:${typeText[s.type]}">${s.label}</div>
+      <div style="font-size:10px;color:var(--text3);white-space:nowrap">${s.dur} น.</div>
+    </div>`;
+  });
+  html += '</div></div>';
+
+  // Today's rooms as tasks
+  html += `<div class="card" style="margin:0"><div class="card-header"><div class="card-title">🔧 ห้องที่ดำเนินการวันนี้ (${todayRooms.length})</div></div><div class="card-body">`;
+  if (todayRooms.length) {
+    todayRooms.forEach(r => {
+      const nb = r.noise==='high'?'<span class="badge badge-red">เสียงสูง</span>':r.noise==='medium'?'<span class="badge badge-amber">เสียงกลาง</span>':'<span class="badge badge-green">เสียงน้อย</span>';
+      const sd = r.startDate ? new Date(r.startDate) : null;
+      const ed = r.endDate ? new Date(r.endDate) : null;
+      html += `<div style="padding:8px 0;border-bottom:1px solid #f1f5f9">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-weight:600;font-size:13px">${r.name}</span>${nb}${getStatus(r.id)}
+        </div>
+        <div style="font-size:12px;color:var(--text2);margin-top:3px">
+          ${r.btu?r.btu.toLocaleString()+' BTU':''} | ชั้น ${r.floor} | ${r.phase} เฟส | 
+          📅 ${sd?sd.getDate()+'/'+(sd.getMonth()+1):''} – ${ed?ed.getDate()+'/'+(ed.getMonth()+1):''} (${r.days} วัน)
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px">${r.note}</div>
+      </div>`;
+    });
+  } else {
+    html += '<p style="color:var(--text3);font-size:13px">ไม่มีงานที่กำหนดวันจริงไว้ในวันนี้</p>';
+  }
+  html += '</div></div></div>';
+
+  // Checklist + daily log
+  html += `<div class="card"><div class="card-header"><div class="card-title">✅ Checklist + บันทึกประจำวัน</div></div><div class="card-body">
+    <div class="grid2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:4px">📌 ก่อนเริ่มงาน</div>
+        <div class="check-row"><input type="checkbox" id="pre0"><label for="pre0">ตรวจสอบ Drawing ก่อนเดินท่อ</label></div><div class="check-row"><input type="checkbox" id="pre1"><label for="pre1">กั้นพาร์ทิชัน + ติดป้ายประกาศ</label></div><div class="check-row"><input type="checkbox" id="pre2"><label for="pre2">แจ้ง Line กลุ่มอาคาร</label></div><div class="check-row"><input type="checkbox" id="pre3"><label for="pre3">เตรียม PPE ครบ</label></div><div class="check-row"><input type="checkbox" id="pre4"><label for="pre4">แจ้ง Safety Officer (ห้องติดเชื้อ/X-Ray)</label></div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px;border-bottom:1px solid var(--border);padding-bottom:4px">📌 หลังเสร็จงาน</div>
+        <div class="check-row"><input type="checkbox" id="post0"><label for="post0">ทำความสะอาดพื้นที่</label></div><div class="check-row"><input type="checkbox" id="post1"><label for="post1">เก็บเศษวัสดุทั้งหมด</label></div><div class="check-row"><input type="checkbox" id="post2"><label for="post2">ถ่ายรูปหลักฐาน</label></div><div class="check-row"><input type="checkbox" id="post3"><label for="post3">บันทึกใบตรวจงาน Online</label></div><div class="check-row"><input type="checkbox" id="post4"><label for="post4">แจ้งผู้ควบคุมงานตรวจรับ</label></div><div class="check-row"><input type="checkbox" id="post5"><label for="post5">ถอดป้ายกั้นพื้นที่</label></div>
+      </div>
+    </div>
+    <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+      <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px">📝 บันทึกรายงานประจำวัน</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">ผู้ควบคุมงาน</label><input type="text" class="form-input" id="dl-supervisor" placeholder="ชื่อ-นามสกุล"></div>
+        <div class="form-group"><label class="form-label">ผู้รับเหมา/ทีมช่าง</label><input type="text" class="form-input" id="dl-contractor" placeholder="บริษัท/ชื่อช่าง"></div>
+      </div>
+      <div class="form-row full"><div class="form-group"><label class="form-label">สรุปงานที่ทำวันนี้</label><textarea class="form-input form-textarea" id="dl-summary" placeholder="สรุปงาน ปัญหา แนวทางแก้ไข..."></textarea></div></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">% งานสำเร็จวันนี้</label><select class="form-select" id="dl-pct"><option>25%</option><option>50%</option><option>75%</option><option>100%</option></select></div>
+        <div class="form-group"><label class="form-label">ปัญหา/อุปสรรค</label><input type="text" class="form-input" id="dl-issue" placeholder="ถ้ามี"></div>
+      </div>
+      <button class="btn btn-success" onclick="saveDailyLog('${val}','${thaiDate}')">💾 บันทึก</button>
+    </div>
+  </div></div>`;
+
+  const logs = JSON.parse(localStorage.getItem('ac_daily_logs')||'[]').filter(l=>l.date===val);
+  if (logs.length) {
+    html += `<div class="card"><div class="card-header"><div class="card-title">📁 บันทึกของวันนี้ (${logs.length})</div></div><div class="card-body">`;
+    logs.forEach(l => { html += `<div style="padding:8px;border:1px solid var(--border);border-radius:6px;margin-bottom:8px;font-size:13px"><div style="font-weight:500">${l.thaiDate} | ${l.supervisor||'—'} | ${l.pct} สำเร็จ</div><div style="color:var(--text2);margin-top:4px">${l.summary||'ไม่มีบันทึก'}</div>${l.issue?`<div style="color:var(--danger);font-size:12px;margin-top:2px">⚠ ${l.issue}</div>`:''}</div>`; });
+    html += '</div></div>';
+  }
+  dom.innerHTML = html;
+}
+
+// ============================================================
+// MONTHLY — uses customRooms with real startDate/endDate
+// ============================================================
+function showMonth(m, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const configs = {
+    may:  { name:'พฤษภาคม 2569',  year:2026, month:4, startDay:5 },
+    jun:  { name:'มิถุนายน 2569',  year:2026, month:5, startDay:1 },
+    jul:  { name:'กรกฎาคม 2569',  year:2026, month:6, startDay:3 },
+    aug:  { name:'สิงหาคม 2569',   year:2026, month:7, startDay:6 },
+    sep:  { name:'กันยายน 2569',   year:2026, month:8, startDay:2 },
+  };
+  const c = configs[m];
+  if (!c) return;
+  const days = new Date(c.year, c.month + 1, 0).getDate();
+
+  const colors = {'ห้องประชุม':'#e0f2fe','ทางเดิน':'#fef3c7','ห้องปฏิบัติการ':'#f0fdf4','คลังยา':'#f0fdf4','ห้องตรวจ':'#eff6ff','ห้องผ่าตัด':'#fee2e2','สำนักงาน':'#faf5ff','ห้องตรวจสุนัข':'#fff7ed','ห้องตรวจแมว':'#fff7ed','ห้องรักษา':'#fff7ed','ห้องจ่ายยา':'#fff7ed','สัตว์ป่วยติดเชื้อ':'#fee2e2','Ventilation':'#f0fdf4'};
+  const textColors = {'ห้องประชุม':'#0369a1','ทางเดิน':'#b45309','ห้องปฏิบัติการ':'#15803d','คลังยา':'#15803d','ห้องตรวจ':'#1d4ed8','ห้องผ่าตัด':'#b91c1c','สำนักงาน':'#7c3aed','ห้องตรวจสุนัข':'#b45309','ห้องตรวจแมว':'#b45309','ห้องรักษา':'#b45309','ห้องจ่ายยา':'#b45309','สัตว์ป่วยติดเชื้อ':'#b91c1c','Ventilation':'#15803d'};
+
+  // Build per-day task list from real dates
+  const dayTasks = {};
+  customRooms.forEach(r => {
+    if (!r.startDate || !r.endDate) return;
+    const rs = parseLocalDate(r.startDate);
+    const re = parseLocalDate(r.endDate);
+    for (let d = 1; d <= days; d++) {
+      const cur = new Date(c.year, c.month, d);
+      if (cur >= rs && cur <= re) {
+        if (!dayTasks[d]) dayTasks[d] = [];
+        dayTasks[d].push(r);
+      }
+    }
+  });
+
+  // Month rooms = any room touching this month
+  const monthRooms = customRooms.filter(r => {
+    if (!r.startDate || !r.endDate) return false;
+    const rs = parseLocalDate(r.startDate);
+    const re = parseLocalDate(r.endDate);
+    const ms = new Date(c.year, c.month, 1);
+    const me = new Date(c.year, c.month, days, 23, 59);
+    return rs <= me && re >= ms;
+  });
+
+  const dayLabels = ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'];
+  let html = `<div class="card">
+    <div class="card-header">
+      <div class="card-title">📅 ${c.name}</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap">
+        ${monthRooms.slice(0,6).map(r => `<span style="padding:2px 6px;border-radius:4px;font-size:10px;background:${colors[r.zone]||'#f0f4f8'};color:${textColors[r.zone]||'#475569'}">${r.name.slice(0,14)}</span>`).join('')}
+        ${monthRooms.length>6?`<span style="font-size:10px;color:var(--text3)">+${monthRooms.length-6} อื่น</span>`:''}
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="month-calendar">
+        ${dayLabels.map(d => `<div class="cal-header">${d}</div>`).join('')}`;
+
+  for (let i = 0; i < c.startDay; i++) html += '<div class="cal-day empty"></div>';
+
+  const today = new Date();
+  for (let d = 1; d <= days; d++) {
+    const date = new Date(c.year, c.month, d);
+    const dow = date.getDay();
+    const isToday = today.getDate()===d && today.getMonth()===c.month && today.getFullYear()===c.year;
+    const isWk = dow===0||dow===6;
+    const tasks = dayTasks[d]||[];
+    const hasHigh = tasks.some(r=>r.noise==='high');
+    html += `<div class="cal-day ${isToday?'today':''} ${isWk?'weekend':''}" style="${hasHigh?'border-color:#fca5a5':''}" onclick="document.getElementById('daily-date').value='${c.year}-${String(c.month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}';showPage('daily');document.querySelector('.nav-btn:nth-child(2)').classList.add('active')">
+      <div class="cal-day-num" style="${isToday?'color:var(--accent);font-weight:700':''}">${d}</div>
+      ${isWk?'<div style="font-size:9px;color:var(--text3)">หยุด</div>':''}
+      ${tasks.slice(0,3).map(r=>`<div class="cal-task" style="background:${colors[r.zone]||'#f0f4f8'};color:${textColors[r.zone]||'#475569'}">${r.name.slice(0,13)}</div>`).join('')}
+      ${tasks.length>3?`<div style="font-size:9px;color:var(--text3)">+${tasks.length-3}</div>`:''}
+    </div>`;
+  }
+  html += '</div></div></div>';
+
+  // Weekly table using real dates
+  html += `<div class="card"><div class="card-header"><div class="card-title">สรุปรายสัปดาห์ — ${c.name}</div></div><div class="card-body">
+    <table class="data-table"><thead><tr><th>วันที่</th><th>ห้อง/พื้นที่</th><th>เครื่อง</th><th>วันเริ่ม–สิ้นสุด</th><th>ระดับเสียง</th><th>สถานะ</th></tr></thead><tbody>`;
+  // Group by week ranges
+  const weekRanges = [{s:1,e:7},{s:8,e:14},{s:15,e:21},{s:22,e:days}];
+  weekRanges.forEach((wr, wi) => {
+    const wr2 = getRoomsInRange(c.year, c.month, wr.s, wr.e);
+    if (!wr2.length) return;
+    html += `<tr style="background:#f8fafc"><td colspan="6" style="font-weight:600;font-size:12px;color:var(--primary)">สัปดาห์ที่ ${wi+1} — วันที่ ${wr.s}–${wr.e} ${c.name.slice(0,6)}</td></tr>`;
+    wr2.forEach(r => {
+      const nb = r.noise==='high'?'<span class="badge badge-red">สูง</span>':r.noise==='medium'?'<span class="badge badge-amber">กลาง</span>':'<span class="badge badge-green">น้อย</span>';
+      const sd = r.startDate?new Date(r.startDate):null;
+      const ed = r.endDate?new Date(r.endDate):null;
+      html += `<tr><td>${sd?sd.getDate()+'/'+(sd.getMonth()+1):''}</td>
+        <td style="font-weight:500">${r.name}</td>
+        <td style="text-align:center">${r.qty}</td>
+        <td style="font-size:12px;white-space:nowrap">${sd?sd.getDate()+'/'+(sd.getMonth()+1):''} – ${ed?ed.getDate()+'/'+(ed.getMonth()+1):''}</td>
+        <td>${nb}</td><td>${getStatus(r.id)}</td></tr>`;
+    });
+  });
+  html += '</tbody></table></div></div>';
+  document.getElementById('monthly-content').innerHTML = html;
+}
+
+// ============================================================
+// GANTT — uses customRooms with real dates, date-based columns
+// ============================================================
+function buildGantt() {
+  // Build week columns from 12 May to 8 Sep 2026
+  const colWeeks = [];
+  let cur = new Date(2026, 4, 11); // start of week containing May 12
+  while (cur <= new Date(2026, 8, 8)) {
+    const ws = new Date(cur);
+    const we = new Date(cur); we.setDate(we.getDate()+6);
+    const dm = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.'];
+    colWeeks.push({start:new Date(ws), end:new Date(we), label:`${ws.getDate()}/${ws.getMonth()+1}–${we.getDate()}/${we.getMonth()+1}`});
+    cur.setDate(cur.getDate()+7);
+  }
+
+  const noiseColor = {'low':'#2563a8','medium':'#d97706','high':'#dc2626'};
+
+  let html = `<div style="overflow-x:auto"><table class="gantt">
+    <thead><tr>
+      <th style="min-width:190px;text-align:left;position:sticky;left:0;background:#f8fafc;z-index:2">ห้อง / พื้นที่</th>
+      <th style="width:35px">ชั้น</th>
+      <th style="width:45px">BTU</th>
+      ${colWeeks.map(w=>`<th style="min-width:62px;font-size:9px;padding:4px 2px">${w.label}</th>`).join('')}
+      <th style="width:60px">สถานะ</th>
+    </tr></thead><tbody>`;
+
+  // Sort by startDate
+  const sorted = [...customRooms].sort((a,b)=>{
+    const sa = a.startDate||'9999'; const sb = b.startDate||'9999';
+    return sa < sb ? -1 : sa > sb ? 1 : 0;
+  });
+
+  sorted.forEach(r => {
+    if (!r.startDate) return;
+    const rs = parseLocalDate(r.startDate)?.getTime() || 0;
+    const re = parseLocalDate(r.endDate)?.getTime() || 0;
+    html += `<tr>
+      <td style="font-size:12px;font-weight:500;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;position:sticky;left:0;background:#fff;z-index:1" title="${r.name}">${r.name}</td>
+      <td style="text-align:center;font-size:11px">${r.floor}</td>
+      <td style="text-align:center;font-size:10px">${r.btu?(r.btu/1000)+'k':'—'}</td>`;
+    colWeeks.forEach(w => {
+      const ws = w.start.getTime(); const we = w.end.getTime() + 86400000;
+      const overlaps = rs < we && re >= ws;
+      if (overlaps) {
+        html += `<td style="padding:2px"><div style="background:${noiseColor[r.noise]||'#888'};height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:500">${r.qty}เครื่อง</div></td>`;
+      } else {
+        html += '<td></td>';
+      }
+    });
+    html += `<td style="font-size:11px">${getStatus(r.id)}</td></tr>`;
+  });
+
+  // Today marker row
+  const todayTs = new Date().getTime();
+  html += `<tr style="background:#f0f7ff"><td style="font-size:11px;font-weight:600;color:var(--primary);position:sticky;left:0;background:#f0f7ff">📍 วันนี้</td><td></td><td></td>`;
+  colWeeks.forEach(w => {
+    const ws = w.start.getTime(); const we = w.end.getTime() + 86400000;
+    html += (todayTs >= ws && todayTs < we) ? `<td style="background:#bfdbfe;border:2px solid var(--accent)"></td>` : '<td></td>';
+  });
+  html += '<td></td></tr>';
+
+  html += '</tbody></table></div>';
+  html += `<div style="display:flex;gap:12px;padding:10px 4px;font-size:12px;flex-wrap:wrap">
+    <span><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#2563a8;vertical-align:middle;margin-right:4px"></span>เสียงน้อย</span>
+    <span><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#d97706;vertical-align:middle;margin-right:4px"></span>เสียงปานกลาง</span>
+    <span><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#dc2626;vertical-align:middle;margin-right:4px"></span>เสียงดัง</span>
+    <span><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#bfdbfe;border:2px solid #0ea5e9;vertical-align:middle;margin-right:4px"></span>สัปดาห์ปัจจุบัน</span>
+  </div>`;
+  document.getElementById('gantt-content').innerHTML = html;
+}
+
+// ============================================================
+// TRACKING PAGE
+// ============================================================
+function buildTracking() {
+  const today = new Date();
+  const todayStr = today.toISOString().slice(0,10);
+
+  // Categorize rooms
+  const onTrack = [], delayed = [], ahead = [], notStarted = [], completed = [];
+
+  customRooms.forEach(r => {
+    if (!r.startDate) return;
+    const planStart = new Date(r.startDate + 'T00:00:00');
+    const planEnd = new Date(r.endDate + 'T23:59:59');
+    const ins = inspections.filter(i => i.roomId === r.id);
+    const lastIns = ins.length ? ins[ins.length-1] : null;
+
+    if (lastIns?.result === 'pass') {
+      completed.push({r, lastIns});
+    } else if (today < planStart) {
+      notStarted.push({r, daysUntil: Math.ceil((planStart-today)/86400000)});
+    } else if (today > planEnd) {
+      // Past end date but not completed
+      delayed.push({r, daysLate: Math.ceil((today-planEnd)/86400000), lastIns});
+    } else {
+      // In progress
+      const totalDays = Math.max(1, (planEnd-planStart)/86400000);
+      const elapsed = (today-planStart)/86400000;
+      const pct = Math.min(100, Math.round(elapsed/totalDays*100));
+      onTrack.push({r, pct, planEnd, lastIns});
+    }
+  });
+
+  const totalRooms = customRooms.filter(r=>r.startDate).length;
+  const planPct = Math.round(completed.length/totalRooms*100);
+
+  let html = `<div class="grid4" style="margin-bottom:16px">
+    <div class="stat-card"><div class="stat-num" style="color:var(--success)">${completed.length}</div><div class="stat-label">✅ เสร็จแล้ว</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--primary-light)">${onTrack.length}</div><div class="stat-label">🔄 กำลังดำเนินการ</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--danger)">${delayed.length}</div><div class="stat-label">⚠ เลยกำหนด</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--text2)">${notStarted.length}</div><div class="stat-label">⏳ ยังไม่เริ่ม</div></div>
+  </div>`;
+
+  // S-Curve / Overall progress bar
+  const projectStart = new Date('2026-05-12');
+  const projectEnd = new Date('2026-09-08');
+  const totalProj = (projectEnd - projectStart) / 86400000;
+  const elapsedProj = Math.max(0, Math.min(totalProj, (today - projectStart) / 86400000));
+  const timelinePct = Math.round(elapsedProj / totalProj * 100);
+  html += `<div class="card" style="margin-bottom:16px"><div class="card-header"><div class="card-title">📊 ความคืบหน้าโครงการ vs เวลาที่ผ่านไป</div></div>
+    <div class="card-body">
+      <div style="margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:4px">
+          <span>ผลงานจริง (${planPct}%)</span><span>เวลาที่ผ่านไป (${timelinePct}%)</span>
+        </div>
+        <div style="background:#e2e8f0;height:14px;border-radius:7px;overflow:hidden;position:relative;margin-bottom:6px">
+          <div style="height:100%;width:${planPct}%;background:var(--success);border-radius:7px;transition:width 0.5s"></div>
+        </div>
+        <div style="background:#e2e8f0;height:14px;border-radius:7px;overflow:hidden;position:relative">
+          <div style="height:100%;width:${timelinePct}%;background:var(--accent);border-radius:7px"></div>
+        </div>
+        <div style="font-size:12px;margin-top:8px;${planPct>=timelinePct?'color:var(--success)':'color:var(--danger)'}">
+          ${planPct>=timelinePct?'✅ ผลงานเป็นไปตามแผนหรือดีกว่า':'⚠ ผลงานล้าหลังกว่าแผน '+Math.abs(timelinePct-planPct)+'%'}
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  html += '<div class="grid2">';
+
+  // Delayed rooms
+  html += `<div class="card" style="margin:0"><div class="card-header"><div class="card-title">🚨 เลยกำหนด (${delayed.length} ห้อง)</div></div><div class="card-body">`;
+  if (!delayed.length) {
+    html += '<div class="notice notice-success">✅ ไม่มีงานที่เลยกำหนด</div>';
+  } else {
+    delayed.forEach(({r, daysLate, lastIns}) => {
+      html += `<div style="padding:10px 0;border-bottom:1px solid #fee2e2">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:600;font-size:13px;color:var(--danger)">${r.name}</span>
+          <span class="badge badge-red">เลย ${daysLate} วัน</span>
+        </div>
+        <div style="font-size:12px;color:var(--text2);margin-top:3px">แผน: ${r.startDate?r.startDate.slice(5).replace('-','/'):'?'} – ${r.endDate?r.endDate.slice(5).replace('-','/'):'?'}</div>
+        <div style="font-size:12px;color:var(--text2)">ผล: ${lastIns?lastIns.result+' ('+lastIns.date+')':'ยังไม่มีใบตรวจ'}</div>
+        <button class="btn btn-sm btn-amber" style="margin-top:6px;font-size:11px" onclick="document.getElementById('ins-room').value='${r.id}';updateInspRoom();showPage('inspect');document.querySelector('.nav-btn:nth-child(5)').classList.add('active')">+ บันทึกผลตรวจ</button>
+      </div>`;
+    });
+  }
+  html += '</div></div>';
+
+  // In-progress rooms
+  html += `<div class="card" style="margin:0"><div class="card-header"><div class="card-title">🔄 กำลังดำเนินการ (${onTrack.length} ห้อง)</div></div><div class="card-body">`;
+  if (!onTrack.length) {
+    html += '<p style="color:var(--text3);font-size:13px">ไม่มีงานที่กำลังดำเนินการในวันนี้</p>';
+  } else {
+    onTrack.forEach(({r, pct, planEnd, lastIns}) => {
+      const daysLeft = Math.max(0,Math.ceil((planEnd-today)/86400000));
+      html += `<div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span style="font-weight:600;font-size:13px">${r.name}</span>
+          <span style="font-size:11px;color:var(--text2)">เหลือ ${daysLeft} วัน</span>
+        </div>
+        <div style="background:#e2e8f0;height:8px;border-radius:4px;overflow:hidden;margin-bottom:4px">
+          <div style="height:100%;width:${pct}%;background:var(--primary-light);border-radius:4px"></div>
+        </div>
+        <div style="font-size:11px;color:var(--text2)">${pct}% ของช่วงเวลาที่วางแผน | สิ้นสุด ${planEnd.getDate()}/${planEnd.getMonth()+1}/69</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px">ผลล่าสุด: ${lastIns?lastIns.result+' ('+lastIns.step.slice(0,20)+')':'ยังไม่มีใบตรวจ'}</div>
+      </div>`;
+    });
+  }
+  html += '</div></div>';
+  html += '</div>';
+
+  // Completed + Upcoming
+  html += `<div class="grid2" style="margin-top:16px">
+    <div class="card" style="margin:0"><div class="card-header"><div class="card-title">✅ เสร็จแล้ว (${completed.length})</div></div><div class="card-body">`;
+  if (!completed.length) {
+    html += '<p style="color:var(--text3);font-size:13px">ยังไม่มีห้องที่ตรวจผ่านในระบบ</p>';
+  } else {
+    completed.forEach(({r, lastIns}) => {
+      html += `<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid #f0fdf4">
+        <span>✅</span>
+        <div style="flex:1"><div style="font-size:13px;font-weight:500">${r.name}</div>
+        <div style="font-size:11px;color:var(--text2)">${lastIns.date} | ${lastIns.supervisor||'—'}</div></div>
+      </div>`;
+    });
+  }
+  html += '</div></div>';
+
+  html += `<div class="card" style="margin:0"><div class="card-header"><div class="card-title">⏳ งานที่กำลังจะมาถึง (7 วัน)</div></div><div class="card-body">`;
+  const upcoming = notStarted.filter(x => x.daysUntil <= 7).sort((a,b)=>a.daysUntil-b.daysUntil);
+  if (!upcoming.length) {
+    html += '<p style="color:var(--text3);font-size:13px">ไม่มีงานใหม่ใน 7 วันข้างหน้า</p>';
+  } else {
+    upcoming.forEach(({r, daysUntil}) => {
+      html += `<div style="padding:8px 0;border-bottom:1px solid #f1f5f9">
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-weight:500;font-size:13px">${r.name}</span>
+          <span class="badge badge-blue">${daysUntil === 0 ? 'วันนี้!' : 'อีก '+daysUntil+' วัน'}</span>
+        </div>
+        <div style="font-size:12px;color:var(--text2);margin-top:2px">เริ่ม ${r.startDate?r.startDate.slice(5).replace('-','/'):''} | ${r.days} วัน | ${r.note.slice(0,40)}</div>
+      </div>`;
+    });
+  }
+  html += '</div></div></div>';
+
+  document.getElementById('tracking-content').innerHTML = html;
+}
+
+// ============================================================
+// PIN AUTHENTICATION — ปลดล็อก 1 ครั้ง ใช้ได้จนกว่าจะล็อกเอง
+// ============================================================
+const CORRECT_PIN = '1111';
+let isUnlocked = false;
+let pinBuffer = '';
+let pinCallback = null;
+let pinTarget = ''; // 'rooms' | 'inspect' | 'general'
+
+// เรียกใช้เมื่อกดปุ่ม "ปลดล็อกเพื่อแก้ไข"
+function unlockToEdit(target) {
+  pinTarget = target || 'general';
+  pinBuffer = '';
+  updatePinDots();
+  document.getElementById('pin-error').style.display = 'none';
+  document.getElementById('pin-action-label').textContent = 'ใส่รหัส 4 หลักเพื่อเข้าสู่โหมดแก้ไข';
+  document.getElementById('pin-overlay').style.display = 'flex';
+  pinCallback = null; // unlock-mode ไม่มี callback
+}
+
+// เรียกใช้สำหรับงานที่ต้องการ PIN เฉพาะครั้ง (delete, reset)
+function requirePin(label, callback) {
+  if (isUnlocked) { callback(); return; }
+  pinCallback = callback;
+  pinBuffer = '';
+  updatePinDots();
+  document.getElementById('pin-error').style.display = 'none';
+  document.getElementById('pin-action-label').textContent = label || 'ใส่รหัส 4 หลัก';
+  document.getElementById('pin-overlay').style.display = 'flex';
+}
+
+function pinPress(digit) {
+  if (pinBuffer.length >= 4) return;
+  pinBuffer += digit;
+  updatePinDots();
+  if (pinBuffer.length === 4) setTimeout(checkPin, 120);
+}
+
+function pinDel() { pinBuffer = pinBuffer.slice(0,-1); updatePinDots(); }
+function pinClear() { pinBuffer = ''; updatePinDots(); }
+
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    const dot = document.getElementById('dot-' + i);
+    if (!dot) continue;
+    dot.classList.toggle('filled', i < pinBuffer.length);
+    dot.classList.remove('shake');
+  }
+}
+
+function checkPin() {
+  if (pinBuffer === CORRECT_PIN) {
+    document.getElementById('pin-overlay').style.display = 'none';
+    if (pinCallback) {
+      // one-time action mode
+      pinCallback();
+      pinCallback = null;
+    } else {
+      // unlock mode
+      isUnlocked = true;
+      updateLockUI();
+      resetAutoLock();
+    }
+  } else {
+    document.getElementById('pin-error').style.display = 'block';
+    for (let i = 0; i < 4; i++) {
+      const dot = document.getElementById('dot-' + i);
+      if (dot) dot.classList.add('shake');
+    }
+    setTimeout(() => { pinBuffer = ''; updatePinDots(); }, 600);
+  }
+}
+
+function closePinModal() {
+  document.getElementById('pin-overlay').style.display = 'none';
+  pinBuffer = '';
+  pinCallback = null;
+}
+
+function lockAll() {
+  isUnlocked = false;
+  pinTarget = '';
+  updateLockUI();
+}
+
+function toggleLockUI() {
+  if (isUnlocked) { lockAll(); }
+  else { unlockToEdit('general'); }
+}
+
+function updateLockUI() {
+  // Header icon
+  const icon = document.getElementById('lock-icon');
+  const label = document.getElementById('lock-label');
+  if (icon) {
+    icon.textContent = isUnlocked ? '🔓' : '🔒';
+    icon.closest('.hstat').style.background = isUnlocked ? 'rgba(22,163,74,0.15)' : '';
+  }
+  if (label) label.textContent = isUnlocked ? 'โหมดแก้ไข' : 'ล็อกอยู่';
+
+  // Inspect page — แสดง/ซ่อนปุ่มบันทึกและ notice
+  const inspSave = document.getElementById('inspect-save-btn');
+  const inspLockedNotice = document.getElementById('inspect-locked-notice');
+  const inspUnlockedNotice = document.getElementById('inspect-unlocked-notice');
+  if (inspSave) inspSave.style.display = isUnlocked ? '' : 'none';
+  if (inspLockedNotice) inspLockedNotice.style.display = isUnlocked ? 'none' : 'flex';
+  if (inspUnlockedNotice) inspUnlockedNotice.style.display = isUnlocked ? 'flex' : 'none';
+  // Disable/enable inspect form inputs
+  const inspForm = document.querySelector('#page-inspect .card-body');
+  if (inspForm) {
+    inspForm.querySelectorAll('input:not([readonly]), select, textarea').forEach(el => {
+      el.disabled = !isUnlocked;
+    });
+  }
+
+  // Rooms page — แสดง/ซ่อนปุ่มแก้ไข
+  const roomsAdd = document.getElementById('rooms-add-btn');
+  if (roomsAdd) roomsAdd.style.display = isUnlocked ? '' : 'none';
+
+  // Edit/delete buttons in rooms table — re-render to show/hide
+  document.querySelectorAll('.room-edit-btn').forEach(btn => {
+    btn.style.display = isUnlocked ? '' : 'none';
+  });
+  document.querySelectorAll('.room-del-btn').forEach(btn => {
+    btn.style.display = isUnlocked ? '' : 'none';
+  });
+  const resetBtn = document.getElementById('rooms-reset-btn');
+  if (resetBtn) resetBtn.style.display = isUnlocked ? '' : 'none';
+}
+
+// Backdrop + keyboard
+document.addEventListener('click', e => {
+  if (e.target === document.getElementById('pin-overlay')) closePinModal();
+});
+document.addEventListener('keydown', e => {
+  if (document.getElementById('pin-overlay')?.style.display !== 'flex') return;
+  if (e.key >= '0' && e.key <= '9') pinPress(e.key);
+  else if (e.key === 'Backspace') pinDel();
+  else if (e.key === 'Escape') closePinModal();
+});
+
+// Auto-lock after 15 min
+let autoLockTimer = null;
+function resetAutoLock() {
+  clearTimeout(autoLockTimer);
+  autoLockTimer = setTimeout(() => { if (isUnlocked) lockAll(); }, 15 * 60 * 1000);
+}
+document.addEventListener('click', () => { if (isUnlocked) resetAutoLock(); });
+
+// ============================================================
+// GOOGLE SHEETS API
+// ============================================================
+const DEFAULT_API_URL = 'https://script.google.com/macros/s/AKfycbzprvvfpEK73Wt-3U_NeCInfcubajbJi_MYdECorOjK-k9DR1oChpfEH6NDdqevUnMF/exec';
+
+function getApiUrl() {
+  // ใช้ URL ที่ตั้งค่าไว้ใน localStorage ก่อน ถ้าไม่มีใช้ default
+  return localStorage.getItem('ac_api_url') || DEFAULT_API_URL;
+}
+
+// แสดง banner เสมอถ้ายังไม่ตั้ง API URL
+function checkApiUrl() {
+  // URL ถูกฝังไว้ใน DEFAULT_API_URL แล้ว — ไม่ต้องแสดง banner
+  const banner = document.getElementById('api-banner');
+  if (banner) banner.style.display = 'none';
+  const urlDisplay = document.getElementById('current-api-url');
+  if (urlDisplay) urlDisplay.textContent = getApiUrl();
+}
+
+function saveApiUrl() {
+  const url = document.getElementById('api-url-input').value.trim();
+  if (!url.startsWith('https://script.google.com')) {
+    alert('URL ไม่ถูกต้อง ต้องเริ่มต้นด้วย https://script.google.com');
+    return;
+  }
+  localStorage.setItem('ac_api_url', url);
+  alert('บันทึก URL เรียบร้อย ✅ กำลังโหลดข้อมูลจาก Sheets...');
+  location.reload();
+}
+
+function clearApiUrl() {
+  if (!confirm('ลบ URL การเชื่อมต่อ Sheets?')) return;
+  localStorage.removeItem('ac_api_url');
+  checkApiUrl();
+  alert('ลบการเชื่อมต่อแล้ว โปรแกรมจะใช้ localStorage แทน');
+}
+
+// ======= Force Sync — อัปโหลดทุกอย่างขึ้น Sheets =======
+async function forceSyncToSheets() {
+  if (!getApiUrl()) {
+    document.getElementById('api-banner').style.display = 'flex';
+    alert('กรุณาใส่ Apps Script URL ก่อนครับ');
+    return;
+  }
+  if (!confirm('อัปโหลดข้อมูลทั้งหมด (ห้อง + ใบตรวจ + รายงานรายวัน) ขึ้น Google Sheets?\n\nข้อมูลใน Sheets จะถูกแทนที่ด้วยข้อมูลปัจจุบัน')) return;
+
+  setLoading(true);
+  let ok = 0, fail = 0;
+
+  // 1. Sync rooms
+  try {
+    const res = await apiPost('rooms', 'overwrite', customRooms);
+    if (res && res.status === 'ok') ok++;
+    else fail++;
+  } catch(e) { fail++; }
+
+  // 2. Sync inspections
+  try {
+    const ins = JSON.parse(localStorage.getItem('ac_inspections') || '[]');
+    const res = await apiPost('inspections', 'overwrite', ins.length ? ins : []);
+    if (res && res.status === 'ok') ok++;
+    else fail++;
+  } catch(e) { fail++; }
+
+  // 3. Sync daily logs
+  try {
+    const logs = JSON.parse(localStorage.getItem('ac_daily_logs') || '[]');
+    const res = await apiPost('daily_logs', 'overwrite', logs.length ? logs : []);
+    if (res && res.status === 'ok') ok++;
+    else fail++;
+  } catch(e) { fail++; }
+
+  setLoading(false);
+
+  if (fail === 0) {
+    alert(`✅ Sync เสร็จแล้ว!\n\nอัปโหลดสำเร็จ ${ok}/3 ชุดข้อมูล\nเครื่องอื่นจะเห็นข้อมูลล่าสุดเมื่อรีเฟรชหน้า`);
+  } else {
+    alert(`⚠️ Sync บางส่วนล้มเหลว (สำเร็จ ${ok}/3)\n\nกรุณาตรวจสอบ Apps Script URL และลองใหม่`);
+  }
+}
+
+// ======= API helpers =======
+async function apiGet(sheet) {
+  const url = getApiUrl();
+  if (!url) return null;
+  try {
+    setLoading(true);
+    const res = await fetch(`${url}?sheet=${sheet}`);
+    const json = await res.json();
+    return json.data || [];
+  } catch(e) {
+    console.error('API GET error:', e);
+    return null;
+  } finally {
+    setLoading(false);
+  }
+}
+
+async function apiPost(sheet, action, data, extra) {
+  const url = getApiUrl();
+  if (!url) return null;
+  try {
+    setLoading(true);
+    const body = { sheet, action, data, ...(extra||{}) };
+    const res = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+    return await res.json();
+  } catch(e) {
+    console.error('API POST error:', e);
+    return null;
+  } finally {
+    setLoading(false);
+  }
+}
+
+function setLoading(on) {
+  const el = document.getElementById('loading-bar');
+  if (el) el.style.display = on ? 'block' : 'none';
+}
+
+// ======= Rooms Storage (Sheets) =======
+let customRooms = [];
+
+async function loadRoomsFromSheets() {
+  const data = await apiGet('rooms');
+  if (data && data.length > 0) {
+    // มีข้อมูลใน Sheets — ใช้ข้อมูลนั้นเสมอ (ไม่ทับด้วย default)
+    customRooms = data.map(r => {
+      const normDate = (v) => {
+        if (!v) return v;
+        const s = String(v).trim();
+        if (s.includes('T') && s.endsWith('Z')) {
+          const d = new Date(new Date(s).getTime() + 7*3600000);
+          return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+        }
+        if (s.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
+          const p = s.split('/');
+          const month = +p[0] > 12 ? p[1] : p[0];
+          const day = +p[0] > 12 ? p[0] : p[1];
+          return p[2]+'-'+String(+month).padStart(2,'0')+'-'+String(+day).padStart(2,'0');
+        }
+        return s;
+      };
+      return {
+        ...r,
+        startDate: normDate(r.startDate),
+        endDate: normDate(r.endDate),
+        btu: parseInt(r.btu) || 0,
+        qty: parseInt(r.qty) || 1,
+        phase: parseInt(r.phase) || 1,
+        week: parseInt(r.week) || 1,
+        days: parseInt(r.days) || 1,
+        priority: parseInt(r.priority) || 99,
+      };
+    });
+    // cache ใน localStorage สำหรับ offline fallback
+    localStorage.setItem('ac_custom_rooms', JSON.stringify(customRooms));
+  } else if (data !== null) {
+    // Sheets ว่างเปล่า (เชื่อมต่อสำเร็จแต่ยังไม่มีข้อมูล)
+    // โหลดจาก localStorage cache ถ้ามี
+    const cached = localStorage.getItem('ac_custom_rooms');
+    if (cached) {
+      try { customRooms = JSON.parse(cached); return; } catch(e) {}
+    }
+    // ไม่มีทั้ง Sheets และ cache → ใช้ default แล้ว push ขึ้น Sheets ครั้งเดียว
+    customRooms = rooms.map(r => ({...r}));
+    await saveRoomsToStorage();
+  } else {
+    // API error (null) — ใช้ localStorage cache แทน ห้าม overwrite Sheets
+    const cached = localStorage.getItem('ac_custom_rooms');
+    if (cached) {
+      try { customRooms = JSON.parse(cached); } catch(e) { customRooms = rooms.map(r=>({...r})); }
+    } else {
+      customRooms = rooms.map(r => ({...r}));
+    }
+  }
+}
+
+async function saveRoomsToStorage() {
+  await apiPost('rooms', 'overwrite', customRooms);
+  // backup ใน localStorage ด้วย
+  localStorage.setItem('ac_custom_rooms', JSON.stringify(customRooms));
+}
+
+// ======= Inspections Storage (Sheets) =======
+async function loadInspectionsFromSheets() {
+  const data = await apiGet('inspections');
+  if (data && data.length > 0) {
+    inspections = data;
+    localStorage.setItem('ac_inspections', JSON.stringify(inspections));
+  } else if (data !== null) {
+    // Sheets ว่าง — โหลดจาก cache ถ้ามี
+    try { inspections = JSON.parse(localStorage.getItem('ac_inspections') || '[]'); }
+    catch(e) { inspections = []; }
+  } else {
+    // API error — ใช้ cache
+    try { inspections = JSON.parse(localStorage.getItem('ac_inspections') || '[]'); }
+    catch(e) { inspections = []; }
+  }
+}
+
+async function saveInspectionToSheets(ins) {
+  await apiPost('inspections', 'append', [ins]);
+  inspections.push(ins);
+  localStorage.setItem('ac_inspections', JSON.stringify(inspections));
+}
+
+async function deleteInspectionFromSheets(insId) {
+  await apiPost('inspections', 'delete', null, { id: insId });
+}
+
+// ======= Daily Logs Storage (Sheets) =======
+async function saveDailyLogToSheets(log) {
+  await apiPost('daily_logs', 'append', [log]);
+}
+
+function getRoomList() { return customRooms; }
+
+// ============================================================
+// ROOMS — CRUD + SCHEDULE EDIT (PIN-protected)
+// ============================================================
+
+function toggleAddRoom(editId) {
+  const doOpen = () => {
+    const card = document.getElementById('add-room-card');
+    const isOpen = card.style.display !== 'none';
+    if (isOpen && !editId) { card.style.display = 'none'; return; }
+    card.style.display = 'block';
+    card.scrollIntoView({behavior:'smooth', block:'start'});
+    if (editId) {
+      const r = customRooms.find(x => x.id === editId);
+      if (!r) return;
+      document.getElementById('add-room-title').textContent = '✏️ แก้ไขรายการ — ' + r.name;
+      document.getElementById('nr-name').value = r.name;
+      document.getElementById('nr-zone').value = r.zone;
+      document.getElementById('nr-floor').value = r.floor;
+      document.getElementById('nr-btu').value = r.btu;
+      document.getElementById('nr-qty').value = r.qty;
+      document.getElementById('nr-phase').value = r.phase;
+      document.getElementById('nr-noise').value = r.noise;
+      document.getElementById('nr-days').value = r.days;
+      document.getElementById('nr-month').value = r.month;
+      document.getElementById('nr-week').value = r.week;
+      document.getElementById('nr-startdate').value = r.startDate || '';
+      document.getElementById('nr-enddate').value = r.endDate || '';
+      document.getElementById('nr-note').value = r.note;
+      document.getElementById('nr-edit-id').value = editId;
+    } else {
+      document.getElementById('add-room-title').textContent = '➕ เพิ่มรายการห้องใหม่';
+      document.getElementById('nr-name').value = '';
+      document.getElementById('nr-note').value = '';
+      document.getElementById('nr-qty').value = 1;
+      document.getElementById('nr-days').value = 2;
+      document.getElementById('nr-startdate').value = '';
+      document.getElementById('nr-enddate').value = '';
+      document.getElementById('nr-edit-id').value = '';
+    }
+  };
+  if (!isUnlocked) { unlockToEdit('rooms'); return; }
+  doOpen();
+}
+
+function saveRoom() {
+  const name = document.getElementById('nr-name').value.trim();
+  if (!name) { alert('กรุณาระบุชื่อห้อง'); return; }
+  if (!isUnlocked) { unlockToEdit('rooms'); return; }
+  (async () => {
+    const editId = document.getElementById('nr-edit-id').value;
+    const newRoom = {
+      id: editId || 'CUSTOM-' + Date.now(),
+      floor: document.getElementById('nr-floor').value,
+      zone: document.getElementById('nr-zone').value,
+      name,
+      btu: parseInt(document.getElementById('nr-btu').value) || 0,
+      qty: parseInt(document.getElementById('nr-qty').value) || 1,
+      phase: parseInt(document.getElementById('nr-phase').value),
+      noise: document.getElementById('nr-noise').value,
+      days: parseInt(document.getElementById('nr-days').value) || 2,
+      month: document.getElementById('nr-month').value,
+      week: parseInt(document.getElementById('nr-week').value),
+      startDate: document.getElementById('nr-startdate').value,
+      endDate: document.getElementById('nr-enddate').value,
+      note: document.getElementById('nr-note').value,
+      priority: editId ? (customRooms.find(r=>r.id===editId)?.priority || 99) : 99,
+      isCustom: true,
+    };
+    if (editId) {
+      const idx = customRooms.findIndex(r => r.id === editId);
+      if (idx >= 0) customRooms[idx] = newRoom;
+    } else {
+      customRooms.push(newRoom);
+    }
+    await saveRoomsToStorage();
+    document.getElementById('add-room-card').style.display = 'none';
+    buildRoomsTable();
+    alert(editId ? 'แก้ไขเรียบร้อย ✅' : 'เพิ่มห้องใหม่เรียบร้อย ✅');
+  })();
+}
+
+function deleteRoom(id) {
+  if (!isUnlocked) { unlockToEdit('rooms'); return; }
+  const r = customRooms.find(x => x.id === id);
+  if (!r) return;
+  if (!confirm(`ยืนยันการลบ "${r.name}"?`)) return;
+  (async () => {
+    customRooms = customRooms.filter(x => x.id !== id);
+    await saveRoomsToStorage();
+    buildRoomsTable();
+  })();
+}
+
+function resetRooms() {
+  requirePin('ใส่รหัสเพื่อรีเซ็ตรายการห้อง', async () => {
+    if (!confirm('รีเซ็ตรายการห้องกลับเป็นค่าเริ่มต้นจาก TOR?')) return;
+    customRooms = rooms.map(r => ({...r}));
+    await saveRoomsToStorage();
+    buildRoomsTable();
+    alert('รีเซ็ตเรียบร้อย');
+  });
+}
+
+function buildRoomsTable() {
+  const floorF = document.getElementById('room-filter')?.value || '';
+  const monthF = document.getElementById('month-filter')?.value || '';
+  const data = customRooms.filter(r => {
+    if (floorF && String(r.floor) !== floorF) return false;
+    if (monthF && r.month !== monthF) return false;
+    return true;
+  });
+
+  const totalMachines = data.reduce((a,r)=>a+r.qty,0);
+  const totalDays = data.reduce((a,r)=>a+r.days,0);
+
+  document.getElementById('rooms-count-title').textContent =
+    `รายการห้องติดตั้ง (${data.length} ตำแหน่ง / ${totalMachines} เครื่อง)`;
+
+  const noiseLabel = {low:'<span class="badge badge-green">น้อย</span>',medium:'<span class="badge badge-amber">ปานกลาง</span>',high:'<span class="badge badge-red">สูง</span>'};
+  const monthFull = {'พ.ค.':'พ.ค.','มิ.ย.':'มิ.ย.','ก.ค.':'ก.ค.'};
+
+  let html = '';
+  data.forEach((r, i) => {
+    const sd = r.startDate ? r.startDate : computeStartDate(r);
+    const ed = r.endDate ? r.endDate : computeEndDate(r);
+    const isCustom = r.isCustom || !rooms.find(x=>x.id===r.id);
+    html += `<tr ${isCustom?'style="background:#fffbeb"':''}>
+      <td style="color:var(--text3)">${i+1}</td>
+      <td style="text-align:center">${r.floor}</td>
+      <td style="font-weight:500">${r.name}${isCustom?'<span class="badge badge-amber" style="margin-left:4px;font-size:9px">ใหม่</span>':''}</td>
+      <td style="text-align:right">${r.btu ? r.btu.toLocaleString() : '—'}</td>
+      <td style="text-align:center">${r.qty}</td>
+      <td style="text-align:center">${r.phase} เฟส</td>
+      <td>${noiseLabel[r.noise]||'—'}</td>
+      <td>${r.month}</td>
+      <td style="text-align:center">ส.${r.week}</td>
+      <td style="font-size:12px;white-space:nowrap">${sd}</td>
+      <td style="font-size:12px;white-space:nowrap">${ed}</td>
+      <td style="text-align:center">${r.days}</td>
+      <td style="font-size:11px;color:var(--text2);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.note}">${r.note}</td>
+      <td>${getStatus(r.id)}</td>
+      <td>
+        <div style="display:flex;gap:3px">
+          <button class="btn btn-sm btn-outline room-edit-btn" style="padding:3px 7px;font-size:11px;${isUnlocked?'':'display:none'}" onclick="toggleAddRoom('${r.id}')">✏️</button>
+          <button class="btn btn-sm room-del-btn" style="padding:3px 7px;font-size:11px;background:#fee2e2;color:#b91c1c;border:none;${isUnlocked?'':'display:none'}" onclick="deleteRoom('${r.id}')">🗑</button>
+          ${!isUnlocked?`<span style="font-size:11px;color:var(--text3)">🔒</span>`:''}
+        </div>
+      </td>
+    </tr>`;
+  });
+  document.getElementById('rooms-tbody').innerHTML = html;
+
+  // Summary bar
+  const passes = data.filter(r => {
+    const ins = inspections.filter(i=>i.roomId===r.id);
+    return ins.length && ins[ins.length-1].result === 'pass';
+  }).length;
+  document.getElementById('rooms-summary-bar').innerHTML =
+    `<span>📦 รวม ${totalMachines} เครื่อง</span>
+     <span>📅 รวม ${totalDays} วันทำงาน</span>
+     <span>✅ ผ่านแล้ว ${passes} ห้อง</span>
+     <span>⏳ รอดำเนินการ ${data.length - passes} ห้อง</span>
+     <span style="margin-left:auto">
+       <button id="rooms-reset-btn" class="btn btn-sm" style="font-size:11px;padding:3px 8px;background:#fef3c7;color:#92400e;border:none;${isUnlocked?'':'display:none'}" onclick="resetRooms()">↺ รีเซ็ต TOR</button>
+     </span>`;
+}
+
+function parseLocalDate(val) {
+  if (!val) return null;
+  const s = String(val).trim();
+  // ISO datetime with T and Z → convert UTC to local date
+  if (s.includes('T') && s.endsWith('Z')) {
+    const d = new Date(s);
+    // Add 7 hours for Asia/Bangkok (UTC+7)
+    const local = new Date(d.getTime() + 7 * 3600000);
+    return local;
+  }
+  // YYYY-MM-DD or DD/MM/YYYY or M/D/YYYY
+  if (s.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    const [y,m,d2] = s.split('-');
+    return new Date(+y, +m-1, +d2);
+  }
+  if (s.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
+    const parts = s.split('/');
+    // Detect M/D/YYYY vs DD/MM/YYYY by checking if first part > 12
+    if (+parts[0] > 12) { // DD/MM/YYYY
+      return new Date(+parts[2], +parts[1]-1, +parts[0]);
+    } else { // M/D/YYYY (US format from Sheets)
+      return new Date(+parts[2], +parts[0]-1, +parts[1]);
+    }
+  }
+  return new Date(s);
+}
+
+function formatLocalDate(val) {
+  const d = parseLocalDate(val);
+  if (!d || isNaN(d)) return '—';
+  return `${d.getDate()}/${d.getMonth()+1}/${String(d.getFullYear()).slice(2)}`;
+}
+
+function computeStartDate(r) {
+  if (r.startDate) return formatLocalDate(r.startDate);
+  const monthMap = {'พ.ค.':4,'มิ.ย.':5,'ก.ค.':6,'ส.ค.':7,'ก.ย.':8};
+  const m = monthMap[r.month];
+  if (m === undefined) return '—';
+  const day = (r.week - 1) * 7 + 1;
+  const d = new Date(2026, m, day);
+  while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate()+1);
+  return `${d.getDate()}/${d.getMonth()+1}/69`;
+}
+
+function computeEndDate(r) {
+  if (r.endDate) return formatLocalDate(r.endDate);
+  const monthMap = {'พ.ค.':4,'มิ.ย.':5,'ก.ค.':6,'ส.ค.':7,'ก.ย.':8};
+  const m = monthMap[r.month];
+  if (m === undefined) return '—';
+  const day = (r.week - 1) * 7 + 1;
+  const d = new Date(2026, m, day);
+  while (d.getDay() === 0 || d.getDay() === 6) d.setDate(d.getDate()+1);
+  let added = 0;
+  while (added < r.days - 1) {
+    d.setDate(d.getDate()+1);
+    if (d.getDay() !== 0 && d.getDay() !== 6) added++;
+  }
+  return `${d.getDate()}/${d.getMonth()+1}/69`;
+}
+
+function filterRooms() { buildRoomsTable(); }
+function getStatus(id) {
+  const ins = inspections.filter(i => i.roomId === id);
+  if (!ins.length) return '<span class="badge badge-gray">รอดำเนินการ</span>';
+  const last = ins[ins.length-1];
+  if (last.result === 'pass') return '<span class="badge badge-green">✅ ผ่าน</span>';
+  if (last.result === 'fail') return '<span class="badge badge-red">❌ ต้องแก้ไข</span>';
+  return '<span class="badge badge-amber">⚠ มีเงื่อนไข</span>';
+}
+
+// ============================================================
+// INSPECTION
+// ============================================================
+function buildInspectPage() {
+  // Populate room select
+  const sel = document.getElementById('ins-room');
+  sel.innerHTML = '<option value="">-- เลือกห้อง --</option>';
+  getRoomList().forEach(r => {
+    sel.innerHTML += `<option value="${r.id}">${r.name}</option>`;
+  });
+  // Set default date
+  if (!document.getElementById('ins-date').value) {
+    document.getElementById('ins-date').valueAsDate = new Date();
+  }
+  // Set inspection number
+  if (!document.getElementById('ins-no').value) {
+    document.getElementById('ins-no').value = 'INS-2569-' + String(insCounter).padStart(3,'0');
+  }
+  // Build checklists
+  buildChecks('checks-electrical', checks.electrical);
+  buildChecks('checks-pipe', checks.pipe);
+  buildChecks('checks-unit', checks.unit);
+  buildChecks('checks-test', checks.test);
+  buildChecks('checks-safety', checks.safety);
+  renderHistory();
+  buildInspectSummary();
+}
+
+function buildChecks(containerId, items) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = items.map((item, i) => `
+    <div class="check-row">
+      <input type="checkbox" id="chk-${containerId}-${i}">
+      <label for="chk-${containerId}-${i}" style="flex:1">${item}</label>
+      <select class="check-status form-select" style="width:90px;font-size:11px;padding:3px 5px">
+        <option value="">—</option>
+        <option value="pass">✅ ผ่าน</option>
+        <option value="fail">❌ ไม่ผ่าน</option>
+        <option value="na">N/A</option>
+      </select>
+    </div>
+  `).join('');
+}
+
+function updateInspRoom() {
+  const id = document.getElementById('ins-room').value;
+  const r = getRoomList().find(x => x.id === id);
+  if (r) {
+    document.getElementById('ins-floor').value = 'ชั้น ' + r.floor;
+    document.getElementById('ins-btu').value = r.btu ? r.btu.toLocaleString() + ' BTU/hr' : '—';
+  }
+}
+
+function saveInspection() {
+  if (!isUnlocked) { unlockToEdit('inspect'); return; }
+  const room = document.getElementById('ins-room').value;
+  if (!room) { alert('กรุณาเลือกห้อง'); return; }
+  (async () => {
+    const r = getRoomList().find(x => x.id === room);
+    const ins = {
+      id: document.getElementById('ins-no').value,
+      date: document.getElementById('ins-date').value,
+      roomId: room,
+      roomName: r ? r.name : room,
+      floor: r ? r.floor : '',
+      supervisor: document.getElementById('ins-supervisor').value,
+      contractor: document.getElementById('ins-contractor').value,
+      btu: document.getElementById('ins-btu').value,
+      brand: document.getElementById('ins-brand').value,
+      step: document.getElementById('ins-step').value,
+      result: document.getElementById('ins-result').value,
+      note: document.getElementById('ins-note').value,
+      deadline: document.getElementById('ins-deadline').value,
+      recheck: document.getElementById('ins-recheck').value,
+      savedAt: new Date().toISOString(),
+    };
+    await saveInspectionToSheets(ins);
+    insCounter++;
+    document.getElementById('ins-no').value = 'INS-2569-' + String(insCounter).padStart(3,'0');
+    renderHistory();
+    buildInspectSummary();
+    buildProgressOverview();
+    alert('บันทึกใบตรวจงานเรียบร้อย ✅');
+  })();
+}
+
+function renderHistory() {
+  const dom = document.getElementById('inspection-history');
+  if (!inspections.length) {
+    dom.innerHTML = '<p style="color:var(--text3);font-size:13px">ยังไม่มีประวัติการตรวจ</p>';
+    return;
+  }
+  const resultLabel = {pass:'<span class="badge badge-green">✅ ผ่าน</span>',conditional:'<span class="badge badge-amber">⚠ มีเงื่อนไข</span>',fail:'<span class="badge badge-red">❌ ไม่ผ่าน</span>'};
+  dom.innerHTML = `<table class="data-table" style="font-size:12px">
+    <thead><tr><th>เลขที่</th><th>วันที่</th><th>ห้อง</th><th>ขั้นตอน</th><th>ผล</th><th></th></tr></thead>
+    <tbody>${inspections.slice().reverse().map((ins,i) => `<tr>
+      <td>${ins.id}</td>
+      <td>${ins.date}</td>
+      <td style="font-size:11px">${ins.roomName}</td>
+      <td style="font-size:11px">${ins.step.slice(0,20)}</td>
+      <td>${resultLabel[ins.result] || ''}</td>
+      <td><button class="btn btn-sm" style="padding:2px 6px;font-size:11px" onclick="deleteIns(${inspections.length-1-i})">ลบ</button></td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+function deleteIns(i) {
+  requirePin('ใส่รหัสเพื่อลบรายการตรวจ', async () => {
+    if (!confirm('ลบรายการนี้?')) return;
+    const ins = inspections[i];
+    await deleteInspectionFromSheets(ins.id);
+    inspections.splice(i, 1);
+    renderHistory(); buildInspectSummary();
+  });
+}
+
+function clearInspections() {
+  requirePin('ใส่รหัสเพื่อล้างประวัติทั้งหมด', async () => {
+    if (!confirm('ล้างประวัติการตรวจทั้งหมด?')) return;
+    await apiPost('inspections', 'overwrite', []);
+    inspections = []; insCounter = 1;
+    renderHistory(); buildInspectSummary();
+  });
+}
+
+function buildInspectSummary() {
+  const dom = document.getElementById('inspect-summary');
+  if (!inspections.length) { dom.innerHTML = '<p style="color:var(--text3);font-size:13px">ยังไม่มีข้อมูลการตรวจ</p>'; return; }
+  const pass = inspections.filter(i => i.result === 'pass').length;
+  const fail = inspections.filter(i => i.result === 'fail').length;
+  const cond = inspections.filter(i => i.result === 'conditional').length;
+  dom.innerHTML = `<div class="grid3" style="margin-bottom:12px">
+    <div class="stat-card"><div class="stat-num" style="color:var(--success)">${pass}</div><div class="stat-label">ผ่าน</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--warn)">${cond}</div><div class="stat-label">มีเงื่อนไข</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:var(--danger)">${fail}</div><div class="stat-label">ไม่ผ่าน</div></div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill progress-green" style="width:${Math.round(pass/inspections.length*100)}%"></div></div>
+  <p style="font-size:12px;color:var(--text2);margin-top:6px">ผ่านทั้งหมด ${pass} จาก ${inspections.length} ครั้งที่ตรวจ</p>`;
+}
+
+// ============================================================
+// CSV / EXPORT
+// ============================================================
+function buildCSVs() {
+  // Rooms CSV
+  let csv = 'ลำดับ,ชั้น,โซน,ชื่อห้อง,BTU/hr,จำนวนเครื่อง,เฟส,ระดับเสียง,เดือน,สัปดาห์,จำนวนวัน,หมายเหตุ,สถานะ\n';
+  rooms.forEach((r, i) => {
+    const noiseMap = {low:'น้อย',medium:'ปานกลาง',high:'สูง'};
+    const ins = inspections.filter(x => x.roomId === r.id);
+    const status = !ins.length ? 'รอดำเนินการ' : ins[ins.length-1].result === 'pass' ? 'ผ่าน' : ins[ins.length-1].result === 'fail' ? 'ไม่ผ่าน' : 'มีเงื่อนไข';
+    csv += `${i+1},${r.floor},"${r.zone}","${r.name}",${r.btu||0},${r.qty},${r.phase} เฟส,${noiseMap[r.noise]},${r.month},${r.week},${r.days},"${r.note}",${status}\n`;
+  });
+  document.getElementById('csv-rooms').value = csv;
+
+  // Gantt CSV
+  const weekLabels = ['พ.ค.ส.1','พ.ค.ส.2','พ.ค.ส.3','พ.ค.ส.4','มิ.ย.ส.1','มิ.ย.ส.2','มิ.ย.ส.3','มิ.ย.ส.4','ก.ค.ส.1','ก.ค.ส.2','ก.ค.ส.3','ก.ค.ส.4'];
+  let gcsv = 'ห้อง,ชั้น,' + weekLabels.join(',') + '\n';
+  const weekKeys = ['พ.ค.w1','พ.ค.w2','พ.ค.w3','พ.ค.w4','มิ.ย.w1','มิ.ย.w2','มิ.ย.w3','มิ.ย.w4','ก.ค.w1','ก.ค.w2','ก.ค.w3','ก.ค.w4'];
+  rooms.forEach(r => {
+    const rKey = r.month + 'w' + r.week;
+    const rIdx = weekKeys.indexOf(rKey);
+    const span = Math.ceil(r.days / 5);
+    const cells = weekKeys.map((_, wi) => (wi >= rIdx && wi < rIdx + span) ? `${r.qty}เครื่อง` : '');
+    gcsv += `"${r.name}",${r.floor},${cells.join(',')}\n`;
+  });
+  document.getElementById('csv-gantt').value = gcsv;
+
+  // Inspect CSV
+  let icsv = 'เลขที่,วันที่,ห้อง,ชั้น,ผู้ควบคุม,ผู้รับเหมา,BTU,ยี่ห้อ,ขั้นตอน,ผลการตรวจ,หมายเหตุ,กำหนดแก้ไข\n';
+  inspections.forEach(ins => {
+    icsv += `${ins.id},${ins.date},"${ins.roomName}",${ins.floor},"${ins.supervisor}","${ins.contractor}","${ins.btu}","${ins.brand}","${ins.step}",${ins.result},"${ins.note}",${ins.deadline}\n`;
+  });
+  document.getElementById('csv-inspect').value = icsv;
+
+  // Daily logs CSV
+  const dlogs = JSON.parse(localStorage.getItem('ac_daily_logs')||'[]');
+  let dlcsv = 'วันที่,ผู้ควบคุมงาน,ผู้รับเหมา,สรุปงาน,% สำเร็จ,ปัญหา,บันทึกเมื่อ\n';
+  dlogs.forEach(l => { dlcsv += `${l.date},"${l.supervisor}","${l.contractor}","${l.summary}",${l.pct},"${l.issue}",${l.savedAt}\n`; });
+  const dlEl = document.getElementById('csv-dailylogs');
+  if (dlEl) dlEl.value = dlcsv;
+}
+
+function copyCSV(type) {
+  const el = document.getElementById('csv-' + type);
+  el.select();
+  document.execCommand('copy');
+  alert('คัดลอกแล้ว ✅ วางใน Google Sheets ได้เลย');
+}
+
+function downloadCSV(type) {
+  const content = document.getElementById('csv-' + type).value;
+  const names = {rooms:'รายการห้อง',gantt:'Gantt_Chart',inspect:'ใบตรวจงาน',dailylogs:'รายงานประจำวัน'};
+  const blob = new Blob(['\ufeff' + content], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `แผนติดตั้งแอร์_${names[type]||type}_2569.csv`;
+  a.click();
+}
+
+function printSection(id) {
+  window.print();
+}
+
+function saveDailyLog(date, thaiDate) {
+  if (!isUnlocked) { unlockToEdit('general'); return; }
+  (async () => {
+    const log = {
+      date, thaiDate,
+      supervisor: document.getElementById('dl-supervisor')?.value||'',
+      contractor: document.getElementById('dl-contractor')?.value||'',
+      summary: document.getElementById('dl-summary')?.value||'',
+      pct: document.getElementById('dl-pct')?.value||'',
+      issue: document.getElementById('dl-issue')?.value||'',
+      savedAt: new Date().toISOString()
+    };
+    await saveDailyLogToSheets(log);
+    const logs = JSON.parse(localStorage.getItem('ac_daily_logs')||'[]');
+    logs.push(log);
+    localStorage.setItem('ac_daily_logs', JSON.stringify(logs));
+    alert('บันทึกรายงานประจำวันเรียบร้อย ✅');
+    loadDailyPlan();
+  });
+}
+
+// ============================================================
+// SETTINGS PAGE
+// ============================================================
+function buildSettingsPage() {
+  const url = getApiUrl();
+  const connected = document.getElementById('sheets-connected-info');
+  const notConnected = document.getElementById('sheets-not-connected-info');
+  // URL มีเสมอ (ฝังไว้แล้ว)
+  if (connected) connected.style.display = 'block';
+  if (notConnected) notConnected.style.display = 'none';
+  const urlDisplay = document.getElementById('current-api-url');
+  if (urlDisplay) urlDisplay.textContent = url;
+
+  const ins = JSON.parse(localStorage.getItem('ac_inspections') || '[]');
+  const logs = JSON.parse(localStorage.getItem('ac_daily_logs') || '[]');
+  const infoEl = document.getElementById('local-data-info');
+  if (infoEl) {
+    infoEl.innerHTML = `
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div>🏠 รายการห้อง: <strong>${customRooms.length} ห้อง</strong></div>
+        <div>📋 ใบตรวจงาน: <strong>${ins.length} รายการ</strong></div>
+        <div>📝 รายงานรายวัน: <strong>${logs.length} รายการ</strong></div>
+        <div style="margin-top:4px;font-size:11px;color:var(--text3)">สถานะ Sheets: 🟢 เชื่อมต่อแล้ว (URL ฝังในโปรแกรม)</div>
+      </div>`;
+  }
+}
+
+function saveApiUrlFromSettings() {
+  const input = document.getElementById('api-url-input-settings');
+  const url = input ? input.value.trim() : '';
+  if (!url.startsWith('https://script.google.com')) {
+    alert('URL ไม่ถูกต้อง ต้องเริ่มต้นด้วย https://script.google.com');
+    return;
+  }
+  localStorage.setItem('ac_api_url', url);
+  alert('บันทึก URL เรียบร้อย ✅ กำลังโหลดข้อมูลจาก Sheets...');
+  location.reload();
+}
+
+function changeApiUrl() {
+  const url = prompt('ใส่ Apps Script URL ใหม่:', getApiUrl());
+  if (!url) return;
+  if (!url.startsWith('https://script.google.com')) { alert('URL ไม่ถูกต้อง'); return; }
+  localStorage.setItem('ac_api_url', url);
+  alert('อัปเดต URL เรียบร้อย ✅');
+  location.reload();
+}
+
+async function loadFromSheets() {
+  if (!getApiUrl()) { alert('กรุณาตั้งค่า Apps Script URL ก่อนครับ'); return; }
+  if (!confirm('โหลดข้อมูลล่าสุดจาก Google Sheets?\n\nข้อมูลในเครื่องนี้จะถูกแทนที่')) return;
+  setLoading(true);
+  await loadRoomsFromSheets();
+  await loadInspectionsFromSheets();
+  insCounter = inspections.length + 1;
+  setLoading(false);
+  buildProgressOverview(); buildRoomsTable(); buildInspectPage(); buildSettingsPage();
+  alert('✅ โหลดข้อมูลจาก Sheets เรียบร้อย');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+async function initApp() {
+  setLoading(true);
+  await loadRoomsFromSheets();
+  await loadInspectionsFromSheets();
+  insCounter = inspections.length + 1;
+  setLoading(false);
+  buildProgressOverview();
+  buildRoomsTable();
+  document.getElementById('daily-date').valueAsDate = new Date();
+  loadDailyPlan();
+  showMonth('may', document.querySelector('#page-monthly .tab'));
+  buildInspectPage();
+  document.getElementById('ins-date').valueAsDate = new Date();
+  buildTracking();
+  checkApiUrl();
+  const el = document.getElementById('total-rooms-stat');
+  if (el) el.textContent = customRooms.length;
+}
+
+(function init() {
+  // URL ฝังในโปรแกรมแล้ว — โหลดจาก Sheets เสมอ
+  // แต่ถ้า Sheets โหลดไม่ได้ จะ fallback ไป localStorage อัตโนมัติ
+  initApp().then(() => {
+    const el = document.getElementById('total-rooms-stat');
+    if (el) el.textContent = customRooms.length;
+  });
+})();
+</script>
+
+<!-- LOADING BAR -->
+<div id="loading-bar" style="display:none;position:fixed;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--accent),var(--primary-light),var(--accent));background-size:200% 100%;animation:loadingSlide 1.2s linear infinite;z-index:99999"></div>
+
+<!-- API SETUP BANNER — แสดงเมื่อยังไม่มี URL -->
+<div id="api-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a3a5c;color:#fff;padding:14px 20px;z-index:9998;flex-direction:column;gap:10px;box-shadow:0 -4px 20px rgba(0,0,0,0.3)">
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <span style="font-size:20px">🔗</span>
+    <div style="flex:1">
+      <div style="font-size:14px;font-weight:600">ยังไม่ได้เชื่อมต่อ Google Sheets</div>
+      <div style="font-size:12px;opacity:0.8">ใส่ URL ของ Apps Script เพื่อให้ข้อมูลซิงค์ทุกเครื่อง</div>
+    </div>
+    <button onclick="document.getElementById('api-banner').style.display='none';showPage('settings');document.querySelector('.nav-btn:last-child').classList.add('active')" style="padding:8px 14px;background:rgba(255,255,255,0.15);color:#fff;border:none;border-radius:7px;font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer">⚙️ ไปตั้งค่า</button>
+    <button onclick="document.getElementById('api-banner').style.display='none'" style="padding:8px 14px;background:rgba(255,255,255,0.1);color:#fff;border:none;border-radius:7px;font-family:'Sarabun',sans-serif;font-size:13px;cursor:pointer">✕ ข้ามก่อน</button>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+    <input id="api-url-input" type="url" placeholder="https://script.google.com/macros/s/.../exec"
+      style="flex:1;min-width:280px;padding:8px 12px;border-radius:7px;border:none;font-size:13px;font-family:'Sarabun',sans-serif;color:#1e293b">
+    <button onclick="saveApiUrl()" style="padding:8px 18px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-family:'Sarabun',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap">เชื่อมต่อ</button>
+  </div>
+</div>
+
+<style>
+@keyframes loadingSlide {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+</style>
+</body>
+</html>
